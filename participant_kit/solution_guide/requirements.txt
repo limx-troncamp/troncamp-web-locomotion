@@ -1,0 +1,12 @@
+# requirements.txt — extra Python packages your solution.py imports.
+#
+# Put this file at the ROOT of your --code-dir. It is pip-installed into the eval runtime at grading
+# time. The HTTP server's own dependencies (and the base image's torch, etc.) are installed separately,
+# so list ONLY the packages YOU add on top. Pin versions for reproducibility.
+#
+# Leave this empty (or omit the file) if you need nothing beyond the base image.
+#
+# Examples:
+# numpy
+# scipy==1.11.4
+# onnxruntime==1.17.0

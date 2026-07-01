@@ -1,0 +1,80 @@
+{
+  "version": "1.2.0",
+  "updated_at": "2026-06-30",
+  "title": "Participant kit — TRON2 (Tron2Task) & Oli (OliTask)",
+  "title_zh": "选手资源包",
+  "description": "Training terrain and solution.py build guide for the TronCamp / HumanoidCamp benchmarks; robot descriptions are linked externally.",
+  "description_zh": "评测同款的训练地形与 solution.py 接口规范，外加 TRON2 / Oli 开源仓库链接（机器人描述见外链，不再随包分发 USD）；支持在线预览与下载。",
+  "links": [
+    {
+      "name": "tron2_rl_lab",
+      "group": "tron",
+      "url": "https://github.com/limx-tron2/tron2_rl_lab",
+      "desc": "TRON2 reinforcement-learning training lab — train your policy here.",
+      "desc_zh": "TRON2 强化学习训练框架 —— 在这里训练你的策略。"
+    },
+    {
+      "name": "TRON2_YG_LAB",
+      "group": "tron",
+      "url": "https://github.com/limx-tron2/TRON2_YG_LAB",
+      "desc": "TRON2 wheel-leg lab.",
+      "desc_zh": "TRON2 训练 Lab（YG 变体，含足式 sfyg 与轮足 wfyg 配置）。"
+    },
+    {
+      "name": "robot-description",
+      "group": "tron",
+      "url": "https://github.com/limx-tron2/robot-description",
+      "desc": "TRON2 robot description (URDF / meshes / configs).",
+      "desc_zh": "TRON2 机器人描述（URDF / 网格 / 配置）。"
+    },
+    {
+      "name": "humanoid-description",
+      "group": "humanoid",
+      "url": "https://github.com/limxdynamics/humanoid-description",
+      "desc": "Oli humanoid (serial) robot description — the model used by the evaluator.",
+      "desc_zh": "Oli 人形（串联）机器人描述（URDF / 网格 / 配置）；评测即采用该串联模型。"
+    },
+    {
+      "name": "humanoid-rl-deploy-python",
+      "group": "humanoid",
+      "url": "https://github.com/limxdynamics/humanoid-rl-deploy-python",
+      "desc": "Official deploy code + reference policy. Reference only — not necessarily usable as-is for this benchmark.",
+      "desc_zh": "官方部署代码 + policy 参考。仅供参考：部署代码不一定能直接用于本赛题。"
+    }
+  ],
+  "resources": [
+    {
+      "name": "Training terrain (TronCamp / HumanoidCamp)",
+      "name_zh": "训练地形（Tron / 人形）",
+      "path": "training_terrain/",
+      "type": "code",
+      "entry": "training_terrain/README.md",
+      "desc": "Randomized, wide/open IsaacLab terrain with all eval feature types; randomized layouts so you train skills instead of fitting one course. Presets: TASK_C_TRAINING_TERRAIN_CFG, TASK_F_TRAINING_TERRAIN_CFG.",
+      "desc_zh": "随机化、宽阔的 IsaacLab 地形，覆盖评测的全部地形要素；布局随机化，旨在训练通用能力而非过拟合单一赛道。预设 TASK_C_TRAINING_TERRAIN_CFG / TASK_F_TRAINING_TERRAIN_CFG。"
+    },
+    {
+      "name": "Solution build guide",
+      "name_zh": "solution.py 构建指南",
+      "path": "solution_guide/solution_build_guide.md",
+      "type": "doc",
+      "desc": "obs/action contract, sensor index map (proprio/extero/image), velocity-command dispatch, packaging.",
+      "desc_zh": "obs/action 接口约定、传感器索引表（proprio/extero/图像）、速度指令派发、打包方式。"
+    },
+    {
+      "name": "Solution template",
+      "name_zh": "solution.py 模板",
+      "path": "solution_guide/solution_template.py",
+      "type": "code",
+      "desc": "Copy-paste AlgSolution starting point (runs as zero-action).",
+      "desc_zh": "可直接复用的 AlgSolution 起始模板（默认以零动作运行）。"
+    },
+    {
+      "name": "Obs schema (SSOT)",
+      "name_zh": "观测 schema（SSOT）",
+      "path": "solution_guide/obs_schema.py",
+      "type": "code",
+      "desc": "Authoritative obs <-> wire (de)serialization; shared with the eval side.",
+      "desc_zh": "权威的 obs ↔ 网络传输（反）序列化定义，与评测端共用同一份。"
+    }
+  ]
+}
