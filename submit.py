@@ -60,6 +60,7 @@ _TTY = sys.stderr.isatty()
 STAGE_ZH = {
     "deps":         "依赖安装未通过（请检查 requirements.txt）",
     "serve":        "提交的代码无法运行（solution.py 可能导入报错，或 policy.pt 加载失败）",
+    "solution":     "提交的代码运行时出错（solution.py 在 reset/predict 执行中抛出异常）",
     "eval":         "评测运行中出错",
     "timeout":      f"评测超时（{WALL_LIMIT_S // 60} 分钟内未跑完）",
     "env":          "评测环境暂时不可用，请稍后重试或联系主办方",
@@ -211,7 +212,11 @@ def _icon_and_body(sub: dict) -> tuple[str, str]:
         tail = f"（{robot}）" if robot else ""
         return "✓", (f"完成！得分 {total}{tail}" if total is not None else f"完成{tail}")
     if status == "failed":
-        return "✗", "失败 · " + STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
+        body = "失败 · " + STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
+        # stage=solution 为选手自身代码异常，透传确切异常供其自查；其它环节的内部日志不外泄。
+        if sub.get("stage") == "solution" and sub.get("error"):
+            body += f"\n         ↳ {sub['error']}"
+        return "✗", body
     if status == "rejected":
         return "✗", "已拒绝 · " + (sub.get("error") or "提交被拒绝")
     return "·", str(status)
