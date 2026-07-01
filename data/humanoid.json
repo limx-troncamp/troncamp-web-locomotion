@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-01T20:39:23+08:00",
+  "generated_at": "2026-07-01T21:04:59+08:00",
   "deadline": "2026-07-15T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -84,6 +84,32 @@
       "token": "921dc3820a96"
     },
     {
+      "team": "50bfcbd4889e",
+      "display": "2W4pPA",
+      "variant": "OliEdu",
+      "total": 6.819,
+      "robot_type": "oli",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 10.415435791015625,
+        "base": 12.818998336791992,
+        "time_bonus": 0.0,
+        "boundary_penalty": -6.0,
+        "scuff_penalty": -0.0,
+        "fall_penalty": -0.0,
+        "boundary_crossings": 2.0,
+        "scuffs": 0.0,
+        "falls": 35.0,
+        "finished": 0.0,
+        "elapsed_finish": 720.0,
+        "total": 6.818998336791992
+      },
+      "last_submit": "2026-07-01T20:45:08+08:00",
+      "n_submissions": 1,
+      "rank": 4,
+      "token": "50bfcbd4889e"
+    },
+    {
       "team": "83671cea231b",
       "display": "SiFuLw",
       "variant": "OliEdu",
@@ -106,7 +132,7 @@
       },
       "last_submit": "2026-06-30T20:47:41+08:00",
       "n_submissions": 3,
-      "rank": 4,
+      "rank": 5,
       "token": "83671cea231b"
     },
     {
@@ -119,7 +145,7 @@
       "breakdown": {},
       "last_submit": "2026-07-01T17:02:47+08:00",
       "n_submissions": 1,
-      "rank": 5,
+      "rank": 6,
       "token": "3966e994bd0e"
     }
   ],
