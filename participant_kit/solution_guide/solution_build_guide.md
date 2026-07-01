@@ -41,7 +41,13 @@ class AlgSolution:
 
 ## 2. `obs` 字典 —— 你每步收到的内容
 
-`obs` 是一个由 numpy/torch 数组组成的字典，每个数组都带有前导的批维度 1。
+`obs` 是一个字典，每个值都带有前导的批维度 1。**评测时这些值是 GPU（CUDA）上的 torch tensor** —— 沙箱容器
+在 GPU 上驱动你的 `predicts`。
+
+> **⚠️ 用 numpy 处理前先搬到 CPU**：对 CUDA tensor 直接 `np.asarray(obs["proprio"])` 会抛
+> `TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() ...`。先转 CPU：
+> `obs["proprio"].detach().cpu().numpy()`；或沿用 torch（模板即用 `torch.as_tensor(obs[...], device=self.device)`，
+> 直接接受 CUDA tensor），则无需转换。若 `predicts` 抛异常，评测会回报「提交的代码运行时出错」并附上你的异常，便于自查。
 
 | Key | 分组 | 出现于 | Shape | 含义 |
 | --- | --- | --- | --- | --- |

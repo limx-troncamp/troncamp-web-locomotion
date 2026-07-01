@@ -82,7 +82,8 @@ class AlgSolution:
         """每步返回 {"action": <action_dim 个浮点数的扁平列表>, "giveup": bool}。
 
         obs 是一个 dict：obs["proprio"]（总有），以及可选的 obs["extero"]（激光雷达高度扫描）和
-        obs["image"][<cam>]（RGB-D）。形状均为 (1, ...)（batch 为 1）。
+        obs["image"][<cam>]（RGB-D）。形状均为 (1, ...)（batch 为 1）。评测时其值是 **GPU（CUDA）上的
+        torch tensor**：下面的 `torch.as_tensor(...)` 直接接受它；若改用 numpy，先 `.detach().cpu().numpy()`。
         """
         proprio = torch.as_tensor(obs["proprio"], dtype=torch.float32, device=self.device)
         if proprio.ndim == 1:
