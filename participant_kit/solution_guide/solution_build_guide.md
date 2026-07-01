@@ -1,4 +1,4 @@
-# `solution.py` 构建指南 —— TronCamp (Tron2Task) & HumanoidCamp (OliTask)
+# `solution.py` 构建指南 —— TronCamp & HumanoidCamp
 
 你提交一份 **`solution.py`**（即你的 `AlgSolution` 类）以及训练好的权重（例如 `policy.pt`）。
 评测器构建环境，构造一次你的 `AlgSolution`，在每个 episode 开始时调用 `reset()`，然后
@@ -30,6 +30,13 @@ class AlgSolution:
 - `giveup: True` 提前结束 episode，保留当前已得的分数。
 - `current_score` 是运行中的当前分数（float），供你参考。
 
+> **控制 / 仿真频率（TronCamp 与 HumanoidCamp 一致）** —— 评测每个**控制步**调用一次 `predicts`：
+> 控制 / 推理频率 = **50 Hz**（每 20 ms 一步）；底层物理仿真 = **200 Hz**（`sim.dt = 0.005 s`），每个控制步
+> 推进 `decimation = 4` 个物理子步（4 × 5 ms = 20 ms）。两个赛题一致。传感器刷新是另一档：TRON2 相机 /
+> Fairy96 约 **10 Hz**（`update_period = 0.1 s`）、Oli 头部深度相机 **50 Hz**。**请按 50 Hz 训练 / 适配你的
+> policy** —— 若按别的控制频率训练（如官方 deploy walk 控制器 100 Hz），评测仍以 50 Hz 驱动、步态可能失稳
+> （另见 §4）。
+
 ---
 
 ## 2. `obs` 字典 —— 你每步收到的内容
@@ -39,24 +46,23 @@ class AlgSolution:
 | Key | 分组 | 出现于 | Shape | 含义 |
 | --- | --- | --- | --- | --- |
 | `proprio` | top | 所有任务 | `(1, 66)` TRON2 · `(1, 106)` Oli | 内部状态（见 §3） |
-| `extero` | top | 仅 TRON2 (REAL/ORIG) | `(1, 34560)` REAL · `(1, 5760)` ORIG | LiDAR 高度扫描，展平为 `channels × 360`（Oli 无此项） |
+| `extero` | top | 仅 TRON2 | `(1, 34560)` | Fairy96 LiDAR 高度扫描，展平为 `96 × 360`（Oli 无此项） |
 | `image[<cam>]` | image | 带相机的任务 | TRON2 `(1, 480, 640, 3)` rgb / `(1, 480, 640, 1)` depth · Oli `head_depth` `(1, 60, 106, 1)` | 每相机的 RGB-D |
 
 各任务权威的字段列表（名称、dtype、shape、必需/可选）见 `obs_schema.py`
 → `OBS_SCHEMAS`。`schema_key_for_task(task_id)` 把任务 id 映射到其 schema。
 
 ### 图像 key
-- **TRON2 REAL**（`ATEC-…-Tron2A{Legged,Wheel}`）：`head_rgb/head_depth`、`down_rgb/down_depth`、
-  `ee_rgb/ee_depth`。
-- **TRON2 ORIG**（`…-Orig`）：`head_*`、`ee_*`（无 down 相机）。
-- **Oli**（OliTask）：仅头部**深度**（`head_depth`，`(1, 60, 106, 1)`）；无胸部相机、无 RGB、无 LiDAR `extero`。
+- **TRON2**（足式 / 轮足）：`head_rgb/head_depth`（前视）、`down_rgb/down_depth`（下视）、
+  `ee_rgb/ee_depth`（末端手眼）。相机内外参见 README「传感器参考」。
+- **Oli**：仅头部**深度**（`head_depth`，`(1, 60, 106, 1)`）；无胸部相机、无 RGB、无 LiDAR `extero`。
 
 深度为度量值（m）；`inf → 0`。RGB 为 uint8 `HWC`。
 
 ### 读取示例（在 `predicts(obs, ...)` 内）
 
 ```python
-# 激光雷达高度扫描（exteroception）：仅 TRON2（REAL/ORIG）有，Oli 没有 extero。
+# 激光雷达高度扫描（exteroception）：仅 TRON2 有，Oli 没有 extero。
 # 是展平的一维向量 channels*360，reshape 成 (channels, 360) 即逐环高度。
 extero = obs.get("extero")                 # (1, channels*360) 或 None
 if extero is not None:
@@ -66,7 +72,7 @@ if extero is not None:
 images = obs.get("image") or {}            # 无相机的任务为 {}
 head_depth = images.get("head_depth")      # Oli (1,60,106,1) · TRON2 (1,480,640,1) 或 None
 ee_depth   = images.get("ee_depth")        # 仅 TRON2
-# RGB（仅 TRON2 REAL/ORIG）：images.get("head_rgb") → (1,480,640,3) uint8
+# RGB（仅 TRON2）：images.get("head_rgb") → (1,480,640,3) uint8
 ```
 
 > 一律用 `obs.get(...)` 取（缺失返回 `None`/`{}`），**不要假设某项一定存在** —— 不同 `--robot` 提供的
@@ -93,7 +99,7 @@ ee_depth   = images.get("ee_depth")        # 仅 TRON2
 通用规则：`joint_pos = proprio[12 : 12+N]`、`joint_vel = proprio[12+N : 12+2N]`、
 `last_action = proprio[12+2N : 12+3N]`，其中 `N = action_dim = (D-12)//3`。
 
-**Oli（OliTask）—— 106 维（`action_dim = 31`）：** 与 TRON2 同构 —— **带 `base_lin_vel`**（作为速度传感器
+**Oli —— 106 维（`action_dim = 31`）：** 与 TRON2 同构 —— **带 `base_lin_vel`**（作为速度传感器
 通道），但速度指令是 **4 维**的。关节顺序由机器人固定（serial `OLI_EDU_JOINT_NAMES`）：
 
 | Index | 字段 | 说明 |
@@ -113,8 +119,8 @@ ee_depth   = images.get("ee_depth")        # 仅 TRON2
 > 弧度差，`joint_vel` 为 rad·s⁻¹。是否归一化、用什么尺度，由你自行决定（评测不预设缩放系数）。
 
 ### `extero` —— LiDAR（外感 / exteroception）
-展平的高度扫描：`channels × 360` 条射线（REAL Fairy96 = 96×360 = 34560；ORIG 16×360 = 5760）。
-若想要逐环（per-ring）结构，可 reshape 为 `(channels, 360)`。
+展平的高度扫描：`96 × 360` 条射线（Fairy96 = 96×360 = 34560）。若想要逐环（per-ring）结构，可 reshape
+为 `(96, 360)`。LiDAR / 相机的内外参（挂载位姿、FOV、分辨率）见 README「传感器参考」。
 
 ### `image` —— 相机（外感）
 `obs["image"]["head_depth"]` 等。各任务的 key 见 §2 的表格。
@@ -205,7 +211,7 @@ DEFAULT = {
 - **忽略它**，用你自己的逻辑来转向（例如硬编码的前进指令）。
 
 这就是为什么该指令放在 proprio 里而不是单独的通道 —— 速度跟踪型 policy 无需在 solution 侧做任何
-改动。（Oli/OliTask 使用一个带 `stand_flag` 的 4 维指令。）
+改动。（Oli 使用一个带 `stand_flag` 的 4 维指令。）
 
 > **指令速度上限**：Oli 的目标导向指令前进速度可达约 **0.8 m/s**。若你的 policy 按更低的最大速度
 > 训练（例如官方 deploy walk 控制器 `max_vx=0.5`），请在喂给 policy 前先把指令钳到你的训练范围。
@@ -228,8 +234,8 @@ python3 submit.py --server http://118.196.31.68:18080 --token=<队伍令牌> \
 - **`--token`** 是主办方私发的队伍令牌。**令牌可能以 `-` 开头，务必用等号形式 `--token=<队伍令牌>`**，
   否则会被解析成选项。
 - `--robot` 选择任务以及 obs/action 配置：
-  - `sfyg_tron2a` → TRON2 **足式**（Tron2Task）· `wfyg_tron2a` → TRON2 **轮足式**（Tron2Task）·
-    `oli` → **Oli 人形**（OliTask）。
+  - `sfyg_tron2a` → TRON2 **足式** · `wfyg_tron2a` → TRON2 **轮足式** ·
+    `oli` → **Oli 人形**。
 - **`--code-dir`** 必须在其根目录包含 **`solution.py`**（外加它导入的任何辅助模块）。它会被
   解包到运行目录中，因此 `solution.py` 作为顶层模块被导入。
 - **`--ckpt-file`** 单独上传，并在运行时放在 **`solution.py` 旁边**。**⚠️ 无论你上传的文件原名/格式是

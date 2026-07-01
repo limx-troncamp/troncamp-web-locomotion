@@ -34,15 +34,14 @@ class FieldSpec:
 
 # --- 各任务的 schema -----------------------------------------------------------------------------
 # key 即发送端发来的 `task` 值。proprio 对 TRON2 腿式与轮足都是 66（18 个关节：12 + 3*18）。`extero`
-# 是完整展平的激光雷达高度扫描（channels*360 条射线），不是通道数：REAL Fairy96 = 96*360 = 34560；
-# ORIG 16 通道 = 16*360 = 5760。REAL 与 ORIG 都发 `head_*`/`ee_*`；REAL 额外发 `down_*`。（旧契约的
-# `video_*` 分支是死代码 —— 真实环境从不产出它 —— 且漏了 `down_*`；这里都已修正。）
-# `humanoid`（OliTask SERIAL，ATEC-TaskF-OliEdu）：106 维原始 proprio + 头部 D435i 深度图（唯一外感）。
+# 是完整展平的激光雷达高度扫描（channels*360 条射线），不是通道数：Fairy96 = 96*360 = 34560。TRON2 发
+# `head_*` / `ee_*` / `down_*`（前视 / 末端手眼 / 下视 D435i）。
+# `humanoid`（Oli 人形，串联）：106 维原始 proprio + 头部 D435i 深度图（唯一外感）。
 # proprio 顺序 = base_lin_vel(3) | base_ang_vel(3) | velocity_commands(4) | projected_gravity(3) |
 # joint_pos_rel(31) | joint_vel_rel(31) | last_action(31)，关节顺序见 OLI_EDU_JOINT_NAMES；数值为原始
 # 真值（不做预缩放，选手自行归一化）。无 extero/rgb/goal；特权高度扫描不进 obs。
 OBS_SCHEMAS: dict[str, list[FieldSpec]] = {
-    # TRON2 REAL 传感器套件：Fairy96 激光雷达高度扫描 + 前/下 D435i RGB-D + 末端手眼相机（EE）。
+    # TRON2 传感器套件：Fairy96 激光雷达高度扫描 + 前/下 D435i RGB-D + 末端手眼相机（EE）。
     "tron-real": [
         FieldSpec("proprio", "float32", (66,), "top"),
         FieldSpec("extero", "float32", (34560,), "top", required=False),
@@ -53,17 +52,7 @@ OBS_SCHEMAS: dict[str, list[FieldSpec]] = {
         FieldSpec("down_rgb", "uint8", (480, 640, 3), "image", required=False),
         FieldSpec("down_depth", "float32", (480, 640, 1), "image", required=False),
     ],
-    # TRON2 原装套件（-Orig 变体）：16 通道激光雷达高度扫描 + 前向 D435i RGB-D + EE。图像 key 与
-    # REAL 相同，仅少了下视相机。
-    "tron-orig": [
-        FieldSpec("proprio", "float32", (66,), "top"),
-        FieldSpec("extero", "float32", (5760,), "top", required=False),
-        FieldSpec("head_rgb", "uint8", (480, 640, 3), "image", required=False),
-        FieldSpec("head_depth", "float32", (480, 640, 1), "image", required=False),
-        FieldSpec("ee_rgb", "uint8", (480, 640, 3), "image", required=False),
-        FieldSpec("ee_depth", "float32", (480, 640, 1), "image", required=False),
-    ],
-    # Oli 人形（OliTask SERIAL）：106 维原始 proprio + 头部深度图（唯一外感）；无 extero/rgb/goal。
+    # Oli 人形（串联）：106 维原始 proprio + 头部深度图（唯一外感）；无 extero/rgb/goal。
     "humanoid": [
         FieldSpec("proprio", "float32", (106,), "top"),
         FieldSpec("head_depth", "float32", (60, 106, 1), "image", required=False),
@@ -74,15 +63,15 @@ OBS_SCHEMAS: dict[str, list[FieldSpec]] = {
 def schema_key_for_task(task_id: str) -> str:
     """把 gym task id 映射到 schema key。未知任务抛 KeyError。"""
     t = task_id.lower()
-    if "taskc" in t or "tron" in t:
-        return "tron-orig" if t.endswith("-orig") else "tron-real"
-    if "taskf" in t or "oli" in t:
+    if "tron" in t:
+        return "tron-real"
+    if "oli" in t:
         return "humanoid"
     raise KeyError(f"no obs schema registered for task {task_id!r}")
 
 
 def get_schema(key_or_task: str) -> list[FieldSpec]:
-    """既接受 schema key（'tron-real'），也接受 gym task id（如 'ATEC-…-Tron2ALegged'）。"""
+    """既接受 schema key（'tron-real'），也接受含 'tron'/'oli' 子串的机器人/任务标识。"""
     if key_or_task in OBS_SCHEMAS:
         return OBS_SCHEMAS[key_or_task]
     return OBS_SCHEMAS[schema_key_for_task(key_or_task)]

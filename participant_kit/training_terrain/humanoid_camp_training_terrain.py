@@ -1,10 +1,10 @@
-# HumanoidCamp (OliTask, Oli) 训练地形 —— 随机化、宽阔开放，覆盖评测的全部地形要素。
+# HumanoidCamp (Oli) 训练地形 —— 随机化、宽阔开放，覆盖评测的全部地形要素。
 #
 # 用它来训练 Oli 人形。你最终按固定的评测赛道评分，而不是这条训练地形。
 # 接入方式见 README.md。
 #
-#   from humanoid_camp_training_terrain import TASK_F_TRAINING_TERRAIN_CFG, OLI_SPAWN_Z
-#   env_cfg.scene.terrain = TASK_F_TRAINING_TERRAIN_CFG
+#   from humanoid_camp_training_terrain import HUMANOID_CAMP_TRAINING_TERRAIN_CFG, OLI_SPAWN_Z
+#   env_cfg.scene.terrain = HUMANOID_CAMP_TRAINING_TERRAIN_CFG
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ _track.platform_height_range = (0.15, 0.45)
 _track.bump_height_range = (0.08, 0.28)
 
 # 10 x 10 = 100 条各自独立随机化的赛道（难度随行递增）。按你的 GPU 调整。
-TASK_F_TRAINING_TERRAIN_CFG = make_training_terrain_cfg(
+HUMANOID_CAMP_TRAINING_TERRAIN_CFG = make_training_terrain_cfg(
     width=TRACK_WIDTH,
     cell_length=80.0,
     num_rows=10,

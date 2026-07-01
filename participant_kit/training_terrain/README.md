@@ -1,6 +1,6 @@
 # 训练地形(TronCamp / HumanoidCamp)
 
-用于**训练**你的 TRON2(Tron2ATask)或 Oli(OliTask)策略的随机化、宽阔/开放的 IsaacLab 地形。它
+用于**训练**你的 TRON2 或 Oli 策略的随机化、宽阔/开放的 IsaacLab 地形。它
 囊括了评测赛道的**每一种地形要素**——起始平地 → 上行斜坡 → 山顶高台 →
 下行斜坡 → 坎(bumps) → 上行台阶 → 带沟壑(gullies)的桥 → 下行台阶 → 抬高高台
 (踏脚石) → 终点平地——但会**在每个地形网格上以程序化方式随机化每一个参数**,
@@ -13,8 +13,8 @@
 | 文件 | 说明 |
 | --- | --- |
 | `mixed_terrain.py` | 随机化构建器:`make_mixed_track`、`MixedTrackCfg`(所有可调范围)、`make_training_terrain_cfg(...)`。 |
-| `tron_camp_training_terrain.py` | TRON2/Tron2ATask 预设 → `TASK_C_TRAINING_TERRAIN_CFG`、`TRON2_SPAWN_Z`。 |
-| `humanoid_camp_training_terrain.py` | Oli/OliTask 预设 → `TASK_F_TRAINING_TERRAIN_CFG`、`OLI_SPAWN_Z`。 |
+| `tron_camp_training_terrain.py` | TRON2 预设 → `TRON_CAMP_TRAINING_TERRAIN_CFG`、`TRON2_SPAWN_Z`。 |
+| `humanoid_camp_training_terrain.py` | Oli 预设 → `HUMANOID_CAMP_TRAINING_TERRAIN_CFG`、`OLI_SPAWN_Z`。 |
 | `terrain_base.py` | `BetterTerrainGenerator` / `BetterTerrainImporter`。增加了一个永久性保护:每个基本体都必须具有正体积(法线朝外),否则就会抛出异常——PhysX 三角碰撞体是单面的,因此一个翻转的 mesh 会让机器人直接穿模掉落。 |
 
 ## 依赖要求
@@ -28,10 +28,10 @@
 ```python
 import sys
 sys.path.insert(0, "/path/to/participant_kit/training_terrain")
-from tron_camp_training_terrain import TASK_C_TRAINING_TERRAIN_CFG, TRON2_SPAWN_Z
+from tron_camp_training_terrain import TRON_CAMP_TRAINING_TERRAIN_CFG, TRON2_SPAWN_Z
 
 # 在你的 ManagerBasedRLEnvCfg 中:
-env_cfg.scene.terrain = TASK_C_TRAINING_TERRAIN_CFG
+env_cfg.scene.terrain = TRON_CAMP_TRAINING_TERRAIN_CFG
 # 在网格原点生成机器人 base,z = TRON2_SPAWN_Z(Oli:OLI_SPAWN_Z = 1.0)。
 ```
 
@@ -56,9 +56,3 @@ cfg = make_training_terrain_cfg(width=8.0, num_rows=20, num_cols=20, track_cfg=t
 - `n_*_range` —— 地形要素数量(台阶、坎、沟壑、高台)。地形要素**顺序固定**;只有
   参数会变化,因此每个赛道仍然会演练到每一项技能。
 - `cell_length` 必须超过你的范围所能产生的最长赛道(超出部分是一段平地尾巴)。
-
-## 与评测赛道的关系
-
-此地形被刻意设计成**并非**评测赛道。评测赛道是单一确定性的
-布局(Tron2ATask:107 m × 3 m 走廊;OliTask:68 m × 5 m 走廊),包含相同的地形要素。这个
-训练地形会随机化每一种布局,从而让你的策略泛化,而不是去拟合某一个赛道。

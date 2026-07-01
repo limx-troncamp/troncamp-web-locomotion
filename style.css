@@ -218,6 +218,31 @@ section { padding: 4rem 0; border-top: 1px solid var(--line-soft); position: rel
 .step h4 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; }
 .step p { color: var(--muted); font-size: 0.9rem; }
 
+/* 提交流程图（横向节点 + 箭头，窄屏转竖排） */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.55rem; margin-top: 1.4rem; }
+.flow-node {
+  flex: 1 1 165px; min-width: 150px;
+  background: var(--panel); border: 1px solid var(--line);
+  border-top: 2px solid var(--accent-dim); border-radius: 6px;
+  padding: 1.05rem 1.15rem;
+}
+.flow-node .fn {
+  display: block; font-family: var(--mono); font-size: 0.72rem;
+  color: var(--accent); letter-spacing: 0.12em; margin-bottom: 0.5rem;
+}
+.flow-node p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+.flow-node b { color: var(--text); }
+.flow-arrow {
+  display: flex; align-items: center; align-self: center;
+  color: var(--accent); font-family: var(--mono); font-size: 1.25rem; font-weight: 600;
+}
+
+/* 评测：完赛材料要点列表 */
+.reqs { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.6rem; }
+.reqs li { position: relative; padding-left: 1.1rem; color: var(--muted); font-size: 0.92rem; }
+.reqs li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-dim); }
+.reqs li b { color: var(--text); }
+
 /* 提交代码块 */
 .code {
   font-family: var(--mono); font-size: 0.85rem; color: var(--text);
@@ -332,4 +357,6 @@ footer { border-top: 1px solid var(--line); padding: 3rem 0; color: var(--dim); 
   .nav-links { gap: 0.9rem; }
   .nav-links a:not(.cta) { display: none; }
   table.board { font-size: 0.9rem; }
+  .flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); align-self: flex-start; margin-left: 1.3rem; }
 }

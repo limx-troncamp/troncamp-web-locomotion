@@ -1,10 +1,10 @@
 {
-  "version": "1.2.0",
-  "updated_at": "2026-06-30",
-  "title": "Participant kit — TRON2 (Tron2Task) & Oli (OliTask)",
+  "version": "1.3.0",
+  "updated_at": "2026-07-01",
+  "title": "Participant kit — TronCamp (TRON2) & HumanoidCamp (Oli)",
   "title_zh": "选手资源包",
-  "description": "Training terrain and solution.py build guide for the TronCamp / HumanoidCamp benchmarks; robot descriptions are linked externally.",
-  "description_zh": "评测同款的训练地形与 solution.py 接口规范，外加 TRON2 / Oli 开源仓库链接（机器人描述见外链，不再随包分发 USD）；支持在线预览与下载。",
+  "description": "Training terrain, solution.py build guide, and an optional-sensor (camera / LiDAR intrinsics + extrinsics) reference for the TronCamp / HumanoidCamp benchmarks.",
+  "description_zh": "评测同款的训练地形与 solution.py 接口规范，含传感器内外参参考（训练可选：相机 / 雷达），外加 TRON2 / Oli 开源仓库链接；支持在线预览与下载。",
   "links": [
     {
       "name": "tron2_rl_lab",
@@ -49,8 +49,8 @@
       "path": "training_terrain/",
       "type": "code",
       "entry": "training_terrain/README.md",
-      "desc": "Randomized, wide/open IsaacLab terrain with all eval feature types; randomized layouts so you train skills instead of fitting one course. Presets: TASK_C_TRAINING_TERRAIN_CFG, TASK_F_TRAINING_TERRAIN_CFG.",
-      "desc_zh": "随机化、宽阔的 IsaacLab 地形，覆盖评测的全部地形要素；布局随机化，旨在训练通用能力而非过拟合单一赛道。预设 TASK_C_TRAINING_TERRAIN_CFG / TASK_F_TRAINING_TERRAIN_CFG。"
+      "desc": "Randomized, wide/open IsaacLab terrain with all eval feature types; randomized layouts so you train skills instead of fitting one course. Presets: TRON_CAMP_TRAINING_TERRAIN_CFG, HUMANOID_CAMP_TRAINING_TERRAIN_CFG.",
+      "desc_zh": "随机化、宽阔的 IsaacLab 地形，覆盖评测的全部地形要素；布局随机化，旨在训练通用能力而非过拟合单一赛道。预设 TRON_CAMP_TRAINING_TERRAIN_CFG / HUMANOID_CAMP_TRAINING_TERRAIN_CFG。"
     },
     {
       "name": "Solution build guide",
