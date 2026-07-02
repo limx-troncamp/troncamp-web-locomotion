@@ -212,10 +212,13 @@ def _icon_and_body(sub: dict) -> tuple[str, str]:
         tail = f"（{robot}）" if robot else ""
         return "✓", (f"完成！得分 {total}{tail}" if total is not None else f"完成{tail}")
     if status == "failed":
-        body = "失败 · " + STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
-        # stage=solution 为选手自身代码异常，透传确切异常供其自查；其它环节的内部日志不外泄。
-        if sub.get("stage") == "solution" and sub.get("error"):
-            body += f"\n         ↳ {sub['error']}"
+        base = STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
+        body = "失败 · " + base
+        # 选手自身问题（solution 运行时 / serve 启动/导入）透传确切异常供其自查；与 STAGE_ZH 重复的通用
+        # 兜底（如「提交的代码无法运行」）不重复展示；其它环节（env/eval/timeout）的内部日志不外泄。
+        err = sub.get("error")
+        if sub.get("stage") in ("solution", "serve") and err and err not in base:
+            body += f"\n         ↳ {err}"
         return "✗", body
     if status == "rejected":
         return "✗", "已拒绝 · " + (sub.get("error") or "提交被拒绝")
