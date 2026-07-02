@@ -249,9 +249,11 @@ python3 submit.py --server http://118.196.31.68:18080 --token=<队伍令牌> \
   `policy.onnx`）。** 请按 `policy.pt`（或 `policy.onnx`）这个名字加载——`os.path.join(os.path.dirname(__file__),
   "policy.pt")`，onnxruntime/torch 都按文件内容读、不看扩展名；**不要假设保留你上传时的原始文件名**。
   见 `solution_template.py`。
-- **在代码目录中添加一个 `requirements.txt`** 以安装额外的 Python 包 —— 它会在容器构建时被
-  `pip install -r`。HTTP 服务器自身的依赖是单独安装的，因此你的 `requirements.txt` 纯粹是增量的
-  （只列出*你自己*导入的内容）。
+- **在代码目录中添加一个 `requirements.txt`** 声明你额外用到的 Python 包 —— 容器构建时会 `pip install -r`。
+  评测镜像**已预装** `torch` + `numpy`（基础镜像自带）以及 HTTP 服务依赖（`fastapi`/`uvicorn`/`python-multipart`）；
+  **其它你在 solution.py 里 `import` 的包（例如 `onnxruntime`）必须自己在 `requirements.txt` 里声明**，否则
+  容器启动即 `ModuleNotFoundError`、这份提交跑不起来（评测会把该异常回报给你，便于自查）。所以
+  `requirements.txt` 是增量的 —— 只列这些额外的包（完全无额外依赖的提交可以不带它）。
 - **不要放入** `server.py`、`obs_schema.py` 或 `run.sh` 到你的代码目录 —— 平台会把这些作为固定
   基础设施注入；自带会冲突。（`obs_schema.py` 在评测时*确实*存在于你的运行目录中，因此
   `import obs_schema` 可用；本资源包里的副本仅供参考 / 本地测试。）
