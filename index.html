@@ -78,7 +78,7 @@
 <section id="tron">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">02 / TronCamp · TRON 2</span>
+      <span class="sec-num">02 / TRONCamp · TRON 2</span>
       <h2>带臂足 · 复合地形长距离穿越</h2>
       <p>带臂足机器人（参考构型 <b>TRON 2</b>：双脚掌 / 轮 + 单机械臂）在约 100m、宽 3m 的复合地形直线赛道上比拼全身运动能力。赛道串联坡道、楼梯与 3 个<b>不可推动</b>高台；手臂可主动撑、扶、攀辅助通过并额外加分，鼓励「行走 + 操作」的统一策略。</p>
       <p><b style="color:var(--text)">本体</b>：TRON 2 双脚掌 / 轮 + 单机械臂（<b>6 DoF + 二指夹爪</b>），自带下视 RGB-D + 前视 RGB-D + 激光雷达；具体传感器外参可参考<a href="./resources.html">选手资源页</a>。</p>
@@ -188,7 +188,7 @@ wget https://limx-troncamp.github.io/troncamp-web-locomotion/submit.py</div>
 
     <div class="sec-head" style="margin-top:2rem;margin-bottom:0.8rem">
       <h2 style="font-size:1.3rem">② 提交</h2>
-      <p>按赛题选 <code>--competition</code> 与 <code>--robot</code>：Tron 用 <code>sfyg_tron2a</code>（腿式）或 <code>wfyg_tron2a</code>（轮式），人形用 <code>oli</code>。</p>
+      <p>按赛题选 <code>--competition</code> 与 <code>--robot</code>：Tron 用 <code>sfyg_tron2a</code>（腿式）或 <code>wfyg_tron2a</code>（轮式），人形用 <code>oli</code>。<b>每队每日可提交3次。</b></p>
     </div>
     <div class="code"><span class="c"># 提交 TronCamp（TRON 2 腿式；轮式把 robot 换成 wfyg_tron2a）</span>
 python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <span class="a">--token=</span>&lt;队伍令牌&gt; \
@@ -211,7 +211,7 @@ python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <sp
       <span class="flow-arrow">→</span>
       <div class="flow-node"><span class="fn">02 部署代码</span><p>参照 <b>solution.py</b> 模板与指引文档写好部署推理代码，按目录规范放置。</p></div>
       <span class="flow-arrow">→</span>
-      <div class="flow-node"><span class="fn">03 提交</span><p>用 <b>submit.py</b> 提交部署代码与 policy。</p></div>
+      <div class="flow-node"><span class="fn">03 提交</span><p>用 <b>submit.py</b> 提交部署代码与 policy。<b>每队每日可提交3次。</b></p></div>
       <span class="flow-arrow">→</span>
       <div class="flow-node"><span class="fn">04 评测</span><p>提交后由后端<b>自动评测</b>。</p></div>
       <span class="flow-arrow">→</span>
@@ -280,7 +280,7 @@ python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <sp
     <div class="foot-grid">
       <div class="foot-col">
         <h5>赛题</h5>
-        <a href="#tron">TronCamp · TRON 2</a>
+        <a href="#tron">TRONCamp · TRON 2</a>
         <a href="#humanoid">Humanoid · Oli</a>
         <a href="#submit">提交方式</a>
         <a href="#eval">评测</a>
@@ -293,7 +293,7 @@ python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <sp
       <div class="foot-col">
         <h5>平台</h5>
         <a href="https://github.com/limxdynamics" target="_blank" rel="noopener">LimX Dynamics ↗</a>
-        <a href="https://limx-troncamp.github.io/troncamp-web-mani/" target="_blank" rel="noopener">TronCamp Manipulation ↗</a>
+        <a href="https://limx-troncamp.github.io/troncamp-web-mani/" target="_blank" rel="noopener">TRONCamp Manipulation ↗</a>
       </div>
     </div>
     <p class="foot-note">TRONCamp · Locomotion · 复合地形长距离穿越 · 两赛题地形 / 赛制与计分规则各自独立，最终得分计入构型权重后统一排名。量化成绩由评测集群自动产出。</p>
