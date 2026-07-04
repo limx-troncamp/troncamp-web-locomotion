@@ -230,13 +230,13 @@ DEFAULT = {
 提交两样东西：一个**代码目录**和你的**权重文件**。提交身份只靠主办方私发的**队伍令牌**。
 
 ```bash
-python3 submit.py --server http://118.196.31.68:18080 --token=<队伍令牌> \
+python3 submit.py --server https://submit.troncamp-loco.limxdynamics.com --token=<队伍令牌> \
                   --competition <tron|humanoid> \
                   --robot <oli|sfyg_tron2a|wfyg_tron2a> \
                   --ckpt-file policy.pt --code-dir ./my_solution
 ```
 
-- **`--server`** 是评测服务器地址（官方 `http://118.196.31.68:18080`）。
+- **`--server`** 是评测服务器地址（官方 `https://submit.troncamp-loco.limxdynamics.com`）。
 - **`--token`** 是主办方私发的队伍令牌。**令牌可能以 `-` 开头，务必用等号形式 `--token=<队伍令牌>`**，
   否则会被解析成选项。
 - `--robot` 选择任务以及 obs/action 配置：
@@ -274,4 +274,4 @@ my_solution/                 # 即 --code-dir
 
 评测服务器加载你的 `solution.py`，构造 `AlgSolution`，并按上文所述通过
 `reset()` / `get_action_spec()` / `predicts()` 来驱动它。用
-`python3 submit.py --server http://118.196.31.68:18080 --token=<队伍令牌> --status` 查询本队提交状态与分数。
+`python3 submit.py --server https://submit.troncamp-loco.limxdynamics.com --token=<队伍令牌> --status` 查询本队提交状态与分数。

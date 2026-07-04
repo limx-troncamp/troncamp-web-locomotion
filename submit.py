@@ -7,12 +7,12 @@
   ③ 默认就地轮询到出结果：排队中(前面几个) → 评测中(已用时) → 完成(得分)/失败(哪一环)。
 
   # 提交（Tron 腿式；轮式把 --robot 换成 wfyg_tron2a；人形用 --competition humanoid --robot oli）
-  python3 submit.py --server http://<评测服务器>:<端口> --token=<队伍令牌> \
+  python3 submit.py --server https://submit.troncamp-loco.limxdynamics.com --token=<队伍令牌> \
       --competition tron --robot sfyg_tron2a --ckpt-file ./policy.pt --code-dir ./solution
   # 只提交、不等结果：加 --no-wait（之后用 --status 查）
 
   # 查询本队各次提交状态/分数
-  python3 submit.py --server http://<评测服务器>:<端口> --token=<队伍令牌> --status
+  python3 submit.py --server https://submit.troncamp-loco.limxdynamics.com --token=<队伍令牌> --status
 
 鉴权：每队一个组织者私发的 **队伍令牌**（无需 GitHub 账号 / PAT）。令牌可能以 - 开头，
 务必用等号形式 --token=<令牌>，否则会被解析成选项。
@@ -378,7 +378,8 @@ def do_status(args) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--server", required=True, help="评测服务器 http://<host>:<port>")
+    p.add_argument("--server", default="https://submit.troncamp-loco.limxdynamics.com",
+                   help="评测服务器地址（默认官方服务器 %(default)s）")
     p.add_argument("--token", required=True, help="队伍令牌（以 - 开头时用 --token=<令牌>）")
     p.add_argument("--status", action="store_true", help="查询本队提交状态/分数（而非提交）")
     p.add_argument("--no-wait", action="store_true", help="只提交、不等结果（之后用 --status 查）")

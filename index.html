@@ -191,11 +191,11 @@ wget https://limx-troncamp.github.io/troncamp-web-locomotion/submit.py</div>
       <p>按赛题选 <code>--competition</code> 与 <code>--robot</code>：Tron 用 <code>sfyg_tron2a</code>（腿式）或 <code>wfyg_tron2a</code>（轮式），人形用 <code>oli</code>。<b>每队每日可提交3次。</b></p>
     </div>
     <div class="code"><span class="c"># 提交 TronCamp（TRON 2 腿式；轮式把 robot 换成 wfyg_tron2a）</span>
-python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <span class="a">--token=</span>&lt;队伍令牌&gt; \
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; \
   <span class="a">--competition</span> tron <span class="a">--robot</span> sfyg_tron2a \
   <span class="a">--ckpt-file</span> ./policy.pt <span class="a">--code-dir</span> solution_dir  <span class="c"># solution_dir（含 solution.py 推理代码的文件夹）</span></div>
     <div class="code"><span class="c"># 提交 Humanoid（人形 Oli）</span>
-python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <span class="a">--token=</span>&lt;队伍令牌&gt; \
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; \
   <span class="a">--competition</span> humanoid <span class="a">--robot</span> oli \
   <span class="a">--ckpt-file</span> ./policy.pt <span class="a">--code-dir</span> solution_dir  <span class="c"># solution_dir（含 solution.py 推理代码的文件夹）</span></div>
 
@@ -204,7 +204,7 @@ python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <sp
       <p>查本队各次提交的状态与分数（queued / done / failed + 总分）。</p>
     </div>
     <div class="code"><span class="c"># 查询本队提交状态与分数</span>
-python3 submit.py <span class="a">--server</span> http://118.196.31.68:18080 <span class="a">--token=</span>&lt;队伍令牌&gt; <span class="a">--status</span></div>
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; <span class="a">--status</span></div>
 
     <div class="flow">
       <div class="flow-node"><span class="fn">01 训练</span><p>用官方提供的<b>地形、机器人资产与训练仓库</b>，训练出自己的 <b>policy</b>。</p></div>
