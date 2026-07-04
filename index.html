@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRONCamp · Locomotion · 复合地形长距离穿越（双赛题合并榜）</title>
+<meta name="description" content="TRONCamp · Locomotion 合并榜：带臂足 TRON 2 与人形 Oli EDU 各自挑战自己的复合地形长距离穿越赛道，比谁走得更远、更快、更稳。Isaac Lab 确定性评测，满分 100，统一排名，自动上榜。">
+<link rel="stylesheet" href="./style.css">
+<script src="./config.js"></script>
+<script src="./board.js" defer></script>
+</head>
+<body data-board="dev">
+
+<nav class="nav">
+  <div class="wrap">
+    <span class="brand">TRONCamp · <span class="accent">Locomotion</span></span>
+    <span class="nav-links">
+      <a href="#overview">概览</a>
+      <a href="#tron">Tron 赛题</a>
+      <a href="#humanoid">人形赛题</a>
+      <a href="#submit">提交</a>
+      <a href="#eval">评测</a>
+      <a href="#board">排行榜</a>
+      <a href="./resources.html" class="cta">资源 ↗</a>
+    </span>
+  </div>
+</nav>
+
+<!-- ───────── Hero ───────── -->
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">Locomotion · 复合地形长距离穿越</span>
+    <h1>复合地形见真章<br><span class="accent">同台竞速</span></h1>
+    <p class="lead">
+      平地上谁都能走，难的是<b>坡道、楼梯、沟壑、高台</b>。TRONCamp · Locomotion 让<b>TRON 2</b> 与人形 <b>Oli EDU</b>
+      各自挑战自己的复合地形赛道，比谁走得<b>更远、更快、更稳</b>。
+    </p>
+    <p class="hero-meta">两道赛题 · 地形 / 赛制与计分规则各自独立 · 最终得分计入构型权重后统一排名 · TRON 2 腿式 sfyg(得分权重 ×1.0) / 轮式 wfyg(得分权重 ×0.8) · 人形 Oli(得分权重 ×1.0) · Isaac Lab 确定性评测 · 满分 100</p>
+    <div class="hero-actions">
+      <a href="#tron" class="btn primary">Tron 赛题</a>
+      <a href="#humanoid" class="btn">人形赛题</a>
+      <a href="#board" class="btn">查看榜单</a>
+    </div>
+    <div class="countdown-box">
+      <span class="label">距提交截止</span>
+      <span id="countdown">—</span>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── 01 概览 ───────── -->
+<section id="overview">
+  <div class="wrap">
+    <div class="ov-prose">
+      <span class="sec-num">01 / 概览</span>
+      <h2 style="margin-bottom:1rem">平地看不出本事，复杂里才见真章</h2>
+      <p>
+        本站合并承载两道机器人运动控制赛题。它们都叫「复合地形长距离穿越」，但<strong>地形不同、赛制与计分规则各自独立、互不混用</strong>——
+        一个考带臂足的全身运控与 locomotion，一个考人形的长距离地形适应与抗冲击稳定。
+      </p>
+    </div>
+    <div class="cards layers" style="margin-top:1.8rem">
+      <a class="card layer-card" href="#tron">
+        <div class="ln">TRON 2 · TRON</div>
+        <h3>带臂足 · 复合地形长距离穿越</h3>
+        <p>带臂足机器人 <b>TRON 2</b>（双脚掌 / 轮 + 单机械臂）在约 100m 复合地形上比拼全身运控；手臂可主动撑、攀过高台，额外加分。</p>
+      </a>
+      <a class="card layer-card" href="#humanoid">
+        <div class="ln">Oli · HUMANOID</div>
+        <h3>人形 · 复合地形长距离穿越</h3>
+        <p>人形机器人 <b>Oli EDU</b> 在约 65m 复合地形上比拼长距离穿越，串联坡道、坎、楼梯与沟壑；考察深度视觉感知与抗冲击稳定。</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 02 Tron 赛题 ───────── -->
+<section id="tron">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 / TRONCamp · TRON 2</span>
+      <h2>带臂足 · 复合地形长距离穿越</h2>
+      <p>带臂足机器人（参考构型 <b>TRON 2</b>：双脚掌 / 轮 + 单机械臂）在约 100m、宽 3m 的复合地形直线赛道上比拼全身运动能力。赛道串联坡道、楼梯与 3 个<b>不可推动</b>高台；手臂可主动撑、扶、攀辅助通过并额外加分，鼓励「行走 + 操作」的统一策略。</p>
+      <p><b style="color:var(--text)">本体</b>：TRON 2 双脚掌 / 轮 + 单机械臂（<b>6 DoF + 二指夹爪</b>），自带下视 RGB-D + 前视 RGB-D + 激光雷达；具体传感器外参可参考<a href="./resources.html">选手资源页</a>。</p>
+    </div>
+    <table class="dtable">
+      <thead><tr><th style="width:6rem">段</th><th style="width:11rem">名称</th><th style="width:6rem">长度</th><th>关键参数</th></tr></thead>
+      <tbody>
+        <tr><td class="lvl">S1</td><td>平地起步段</td><td>20 m</td><td>平整地面，无特殊要求</td></tr>
+        <tr><td class="lvl">S2</td><td>上坡段</td><td>15 m</td><td>坡度 <b>+15°</b></td></tr>
+        <tr><td class="lvl">S3</td><td>下坡段</td><td>15 m</td><td>坡度 <b>−15°</b></td></tr>
+        <tr><td class="lvl">S4</td><td>平地过渡段</td><td>6 m</td><td>平地缓冲</td></tr>
+        <tr><td class="lvl">S5</td><td>上楼梯段</td><td>10 m</td><td>阶高 <b>10–20 cm</b>（随机），阶宽 <b>30 cm</b>，共 6–10 级</td></tr>
+        <tr><td class="lvl">S6</td><td>下楼梯段</td><td>10 m</td><td>对称布置</td></tr>
+        <tr><td class="lvl">S7</td><td>平地段</td><td>10 m</td><td>平整地面</td></tr>
+        <tr><td class="lvl">S8</td><td>变台跨越段</td><td>17 m</td><td><b>3 个高台</b>，高度依次 <b>20 / 30 / 40 cm</b>，台面 <b>0.8m × 1.0m</b>，<b>不可推动</b>（只能跨越）</td></tr>
+        <tr><td class="lvl">终点</td><td>终点段</td><td>4 m</td><td>平地，含终点感应线</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sec-head" style="margin-top:2.4rem;margin-bottom:1rem">
+      <h2 style="font-size:1.3rem">计分（满分 100 · 距离 × 速度 + 协同奖励）</h2>
+      <p>主成绩看走多远、多快；在此之上，locomotion 的协同行为（不跌倒 / 跌倒自恢复、手臂辅撑攀台）额外加分，越界扣分。</p>
+    </div>
+    <div class="formula">
+      基础分 = <span class="accent">D_eff / 100 m × 60</span>
+      <span class="dim">  （满分 60；D_eff = 躯干质心沿赛道方向累计有效前程，不计回退，上限 100 m）</span>
+    </div>
+    <div class="formula">
+      时间加成 = <span class="accent">clamp(20 × (1 − (T − 240) / 240), 0, 20)</span>
+      <span class="dim">  （满分 20；T ≤ 240s 满分，≥ 480s 为 0；未完赛 T = 600s）</span>
+    </div>
+    <table class="dtable" style="margin-top:1.4rem">
+      <thead><tr><th>协同奖励 / 罚则（协同奖励上限 +20）</th><th style="width:14rem">检测方式</th><th style="width:8rem">分值</th></tr></thead>
+      <tbody>
+        <tr><td>跨越高台时手臂辅撑攀爬</td><td>末端施力 + 高度变化</td><td><b>+4 / 台</b>（≤ 3 台）</td></tr>
+        <tr><td>未跌倒 / 跌倒后自主爬起（二者取一）</td><td>全程零跌倒 / 跌倒自恢复</td><td><b>+5</b></td></tr>
+        <tr><td>越出 3m 计分走廊（|y| &gt; 1.5m）</td><td>每次越界</td><td><b>−3 / 次</b></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.9rem;color:var(--muted);font-size:0.9rem"><b style="color:var(--text)">机型</b>：TRON 2 <b>腿式 sfyg（得分权重 ×1.0）</b> / <b>轮式 wfyg（得分权重 ×0.8）</b>，含 REAL / ORIG 传感变体。单局限时 <b>600s</b>，跌倒不终止、可自主恢复。</p>
+  </div>
+</section>
+
+<!-- ───────── 03 人形赛题 ───────── -->
+<section id="humanoid">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03 / Humanoid · Oli</span>
+      <h2>人形 · 复合地形长距离穿越</h2>
+      <p>人形机器人 <b>Oli EDU</b> 在约 65m、宽 5m 的复合地形赛道上比拼长距离穿越。赛道串联坡道、坎、楼梯与沟壑，考察深度视觉感知、地形适应与抗冲击稳定。<b>本赛题与 Tron 赛题的地形 / 赛制与计分规则完全独立，互不混用（最终得分计入构型权重后统一排名）。</b></p>
+      <p><b style="color:var(--text)">本体</b>：Oli EDU，自带头部 Realsense D435i；具体传感器外参可参考<a href="./resources.html">选手资源页</a>。</p>
+    </div>
+    <table class="dtable">
+      <thead><tr><th style="width:6rem">段</th><th style="width:11rem">名称</th><th style="width:6rem">长度</th><th>关键参数</th></tr></thead>
+      <tbody>
+        <tr><td class="lvl">S1</td><td>平地边段</td><td>9 m</td><td>平整起步，无需转向</td></tr>
+        <tr><td class="lvl">S2</td><td>上坡段</td><td>7.5 m</td><td>坡度 <b>+10°</b></td></tr>
+        <tr><td class="lvl">S3</td><td>斜坡直段</td><td>5 m</td><td>坡顶平台</td></tr>
+        <tr><td class="lvl">S4</td><td>下坡段</td><td>7.5 m</td><td>坡度 <b>−10°</b></td></tr>
+        <tr><td class="lvl">S5</td><td>坎</td><td>13 m</td><td><b>3 个坎</b>，高 <b>0.2 / 0.25 / 0.3 m</b>，宽 <b>0.15 / 0.2 / 0.25 m</b>，间距 3 m</td></tr>
+        <tr><td class="lvl">S6</td><td>上楼梯段</td><td>4.5 m</td><td><b>15 级</b>，阶高 0.15 m、踏深 0.30 m</td></tr>
+        <tr><td class="lvl">S7</td><td>沟壑段</td><td>4.75 m</td><td><b>3 道沟</b>，宽 <b>0.2 / 0.25 / 0.3 m</b>，沟间地板段宽 <b>1.0 m</b></td></tr>
+        <tr><td class="lvl">S8</td><td>下楼梯段</td><td>4.5 m</td><td>15 级下降</td></tr>
+        <tr><td class="lvl">终点</td><td>终点段</td><td>9.25 m</td><td>平地，含终点感应线</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sec-head" style="margin-top:2.4rem;margin-bottom:1rem">
+      <h2 style="font-size:1.3rem">计分（满分 100 · 距离 × 速度）</h2>
+      <p>主成绩看在 65m 复合地形上走多远、多快；触地打滑、摔倒、越界扣分。</p>
+    </div>
+    <div class="formula">
+      基础分 = <span class="accent">D_eff / 65 m × 80</span>
+      <span class="dim">  （满分 80；D_eff = 躯干质心沿赛道方向累计有效前程，不计回退，上限 65 m）</span>
+    </div>
+    <div class="formula">
+      时间加成 = <span class="accent">clamp(20 × (1 − (T − 360) / 360), 0, 20)</span>
+      <span class="dim">  （满分 20；T ≤ 360s 满分，≥ 720s 为 0；未完赛 T = 720s）</span>
+    </div>
+    <table class="dtable" style="margin-top:1.4rem">
+      <thead><tr><th>罚则</th><th style="width:18rem">检测方式</th><th style="width:8rem">分值</th></tr></thead>
+      <tbody>
+        <tr><td>越出赛道边界</td><td>质心 |y| &gt; 2.5m，每次越界</td><td><b>−3 / 次</b></td></tr>
+        <tr><td>足部刮蹭（scuff）</td><td>踝部水平力 &gt; 2× 垂直力，超出前 5 次起算</td><td><b>−1 / 次</b>（无封顶）</td></tr>
+        <tr><td>跌倒（非终止）</td><td>躯干质心 &lt; 0.3m 持续 &gt;1s 或膝/肘/头触地</td><td><b>−3 / 次</b></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.9rem;color:var(--muted);font-size:0.9rem"><b style="color:var(--text)">机型</b>：人形 <b>Oli EDU（得分权重 ×1.0）</b>。单局限时 <b>720s</b>，跌倒不终止、可自主恢复。</p>
+  </div>
+</section>
+
+<!-- ───────── 04 提交 ───────── -->
+<section id="submit">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04 / 提交方式</span>
+      <h2>命令行提交，自动评测上榜</h2>
+      <p>提交唯一通道是命令行 <code>submit.py</code>：交<b>推理代码 + 策略权重</b>（<code>solution.py</code> + <code>policy.pt</code>），带<b>队伍令牌</b>。分数由主办方评测算出，榜单取该队历史最高分。两道赛题共用同一个 <code>submit.py</code>，按 <code>--competition</code> 区分。</p>
+    </div>
+
+    <div class="sec-head" style="margin-top:1.8rem;margin-bottom:0.8rem">
+      <h2 style="font-size:1.3rem">① 准备工具</h2>
+      <p>下载提交工具 <code>submit.py</code>。<code>&lt;队伍令牌&gt;</code> 由主办方私发。<b>令牌可能以 <code>-</code> 开头，命令里务必用等号形式 <code>--token=&lt;队伍令牌&gt;</code></b>（否则会被解析成选项）。</p>
+    </div>
+    <div class="code"><span class="c"># 下载提交工具（单文件，零依赖）</span>
+wget https://limx-troncamp.github.io/troncamp-web-locomotion/submit.py</div>
+
+    <div class="sec-head" style="margin-top:2rem;margin-bottom:0.8rem">
+      <h2 style="font-size:1.3rem">② 提交</h2>
+      <p>按赛题选 <code>--competition</code> 与 <code>--robot</code>：Tron 用 <code>sfyg_tron2a</code>（腿式）或 <code>wfyg_tron2a</code>（轮式），人形用 <code>oli</code>。<b>每队每日可提交3次。</b></p>
+    </div>
+    <div class="code"><span class="c"># 提交 TronCamp（TRON 2 腿式；轮式把 robot 换成 wfyg_tron2a）</span>
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; \
+  <span class="a">--competition</span> tron <span class="a">--robot</span> sfyg_tron2a \
+  <span class="a">--ckpt-file</span> ./policy.pt <span class="a">--code-dir</span> solution_dir  <span class="c"># solution_dir（含 solution.py 推理代码的文件夹）</span></div>
+    <div class="code"><span class="c"># 提交 Humanoid（人形 Oli）</span>
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; \
+  <span class="a">--competition</span> humanoid <span class="a">--robot</span> oli \
+  <span class="a">--ckpt-file</span> ./policy.pt <span class="a">--code-dir</span> solution_dir  <span class="c"># solution_dir（含 solution.py 推理代码的文件夹）</span></div>
+
+    <div class="sec-head" style="margin-top:2rem;margin-bottom:0.8rem">
+      <h2 style="font-size:1.3rem">③ 查询</h2>
+      <p>查本队各次提交的状态与分数（queued / done / failed + 总分）。</p>
+    </div>
+    <div class="code"><span class="c"># 查询本队提交状态与分数</span>
+python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; <span class="a">--status</span></div>
+
+    <div class="flow">
+      <div class="flow-node"><span class="fn">01 训练</span><p>用官方提供的<b>地形、机器人资产与训练仓库</b>，训练出自己的 <b>policy</b>。</p></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><span class="fn">02 部署代码</span><p>参照 <b>solution.py</b> 模板与指引文档写好部署推理代码，按目录规范放置。</p></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><span class="fn">03 提交</span><p>用 <b>submit.py</b> 提交部署代码与 policy。<b>每队每日可提交3次。</b></p></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><span class="fn">04 评测</span><p>提交后由后端<b>自动评测</b>。</p></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node"><span class="fn">05 上榜</span><p>成绩<b>登上榜单</b>。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 05 评测 ───────── -->
+<section id="eval">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05 / 评测</span>
+      <h2>计分：线上 70% + 完赛 30%</h2>
+      <p>最终成绩由两部分构成：线上排行榜实测分与完赛材料评审分。线上分由评测集群自动产出，完赛材料由主办方评审。</p>
+    </div>
+    <div class="formula">
+      总评 = <span class="accent">线上排行榜 × 70%</span> + <span class="accent">完赛材料 × 30%</span>
+      <span class="dim">  （线上：评测集群实测总分；完赛：完整代码思路讲解 + 实机 / 仿真演示视频）</span>
+    </div>
+
+    <div class="sec-head" style="margin-top:2.4rem;margin-bottom:1rem">
+      <h2 style="font-size:1.3rem">完赛材料</h2>
+      <p>请于 <b>2026 年 7 月 15 日 24:00 前</b>，将最终讲解及演示视频提交至邮箱 <a href="mailto:troncamp@limxdynamics.com">troncamp@limxdynamics.com</a>，该视频将作为完赛材料计分依据。</p>
+    </div>
+    <ul class="reqs">
+      <li><b>完整展示</b>代码思路及实机 / 仿真演示过程</li>
+      <li>建议配合<b>画外音讲解</b>，便于主办方理解方案亮点</li>
+      <li>整体时长请<b>控制在 3 分钟以内</b></li>
+      <li>邮件命名格式：<b>姓名-专属提交码-赛道名称</b>（示例：张三-Token-Locomotion）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ───────── 06 排行榜 ───────── -->
+<section id="board">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06 / 排行榜</span>
+      <h2>合并榜（Dev）· 统一排名</h2>
+      <p>两道赛题成绩同台排名（按官方总分降序，机型权重已计入）。代码运行成功，获得得分，即可通过查询指令或在榜上查询成绩。身份以队伍令牌尾号匿名展示。</p>
+    </div>
+    <div class="board-head">
+      <span class="upd" id="updated">加载中…</span>
+      <a class="to-final btn" href="./final.html">FINAL 榜 ↗</a>
+    </div>
+    <table id="board-table" class="board board-strip" hidden>
+      <thead>
+        <tr class="grp">
+          <th class="c-rank">#</th>
+          <th class="c-team">Token</th>
+          <th class="c-gate">赛题</th>
+          <th class="c-gate c-model">机型</th>
+          <th class="c-t3">总分 <span class="th-sub">满分 100 · 完赛 · 用时</span></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p id="empty" hidden>暂无成绩</p>
+  </div>
+</section>
+
+<!-- ───────── Footer ───────── -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5>赛题</h5>
+        <a href="#tron">TRONCamp · TRON 2</a>
+        <a href="#humanoid">Humanoid · Oli</a>
+        <a href="#submit">提交方式</a>
+        <a href="#eval">评测</a>
+      </div>
+      <div class="foot-col">
+        <h5>榜单</h5>
+        <a href="#board">合并榜（Dev）</a>
+        <a href="./final.html">Final 排行榜 ↗</a>
+      </div>
+      <div class="foot-col">
+        <h5>平台</h5>
+        <a href="https://github.com/limxdynamics" target="_blank" rel="noopener">LimX Dynamics ↗</a>
+        <a href="https://limx-troncamp.github.io/troncamp-web-mani/" target="_blank" rel="noopener">TRONCamp Manipulation ↗</a>
+      </div>
+    </div>
+    <p class="foot-note">TRONCamp · Locomotion · 复合地形长距离穿越 · 两赛题地形 / 赛制与计分规则各自独立，最终得分计入构型权重后统一排名。量化成绩由评测集群自动产出。</p>
+  </div>
+</footer>
+
+</body>
+</html>

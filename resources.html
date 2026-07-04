@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资源获取 · TRONCamp · Locomotion</title>
+<meta name="description" content="TRONCamp · Locomotion 选手资源包：训练地形、solution.py 构建指南与 obs schema，以及 TRON2 开源训练 Lab 链接。可在线预览、直接下载。">
+<link rel="stylesheet" href="./style.css">
+<script src="./config.js"></script>
+<script src="./vendor/marked.min.js" defer></script>
+<script src="./resources.js" defer></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="./index.html" class="brand" style="text-decoration:none">TRONCamp · <span class="accent">Locomotion</span></a>
+    <span class="nav-links">
+      <a href="./index.html#overview">概览</a>
+      <a href="./index.html#tron">Tron 赛题</a>
+      <a href="./index.html#humanoid">人形赛题</a>
+      <a href="./index.html#submit">提交</a>
+      <a href="./index.html#eval">评测</a>
+      <a href="./index.html#board">排行榜</a>
+      <a href="./resources.html" class="cta">资源 ↗</a>
+    </span>
+  </div>
+</nav>
+
+<section style="border-top:none;padding-top:3.5rem">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">资源 / RESOURCES</span>
+      <h2 id="kit-title">选手资源包</h2>
+      <p id="kit-desc">训练地形、<code>solution.py</code> 构建指南与 obs schema，以及开源训练 Lab。可在线预览、直接下载。</p>
+      <p class="kit-meta-line" id="kit-meta"></p>
+    </div>
+
+    <h3 class="sub-head">外部仓库 / 训练 Lab</h3>
+    <p class="kit-hint">在这些开源仓库里训练你的策略：强化学习训练框架、轮足 Lab、机器人描述。</p>
+    <div id="kit-links" class="cards kit-links-grid">
+      <p class="kit-fallback">加载中…</p>
+    </div>
+
+    <h3 class="sub-head">资源包（点「查看」在线预览，点「下载」获取文件）</h3>
+    <p class="kit-hint">评测同款的训练地形与 solution.py 接口规范，照着就能开练。</p>
+    <div id="kit-resources" class="cards">
+      <p class="kit-fallback">加载中…</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5>资源</h5>
+        <a href="#kit-links">外部仓库</a>
+        <a href="#kit-resources">资源包下载</a>
+        <a href="./index.html#submit">提交方式</a>
+      </div>
+      <div class="foot-col">
+        <h5>赛题</h5>
+        <a href="./index.html#tron">TRONCamp · TRON 2</a>
+        <a href="./index.html#humanoid">Humanoid · Oli</a>
+        <a href="./index.html#board">合并榜（Dev）</a>
+      </div>
+      <div class="foot-col">
+        <h5>平台</h5>
+        <a href="https://github.com/limxdynamics" target="_blank" rel="noopener">LimX Dynamics ↗</a>
+        <a href="https://limx-troncamp.github.io/troncamp-web-mani/" target="_blank" rel="noopener">TRONCamp Manipulation ↗</a>
+      </div>
+    </div>
+    <p class="foot-note">资源清单由 <code>participant_kit/manifest.json</code> 驱动 —— 新增资源只需更新 manifest 与文件，无需改页面。</p>
+  </div>
+</footer>
+
+</body>
+</html>
