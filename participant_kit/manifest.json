@@ -1,6 +1,6 @@
 {
-  "version": "1.3.1",
-  "updated_at": "2026-07-04",
+  "version": "1.4.0",
+  "updated_at": "2026-07-06",
   "title": "Participant kit — TronCamp (TRON2) & HumanoidCamp (Oli)",
   "title_zh": "选手资源包",
   "description": "Training terrain, solution.py build guide, and an optional-sensor (camera / LiDAR intrinsics + extrinsics) reference for the TronCamp / HumanoidCamp benchmarks.",
@@ -44,6 +44,14 @@
   ],
   "resources": [
     {
+      "name": "Participant kit README",
+      "name_zh": "选手资源包 README",
+      "path": "README.md",
+      "type": "doc",
+      "desc": "Overview of the whole participant kit — what each resource is and how the pieces fit together.",
+      "desc_zh": "选手资源包总览 —— 各资源的内容说明与配合使用方式，可在线查看或下载。"
+    },
+    {
       "name": "Training terrain (TronCamp / HumanoidCamp)",
       "name_zh": "训练地形（Tron / 人形）",
       "path": "training_terrain/",
@@ -55,26 +63,11 @@
     {
       "name": "Solution build guide",
       "name_zh": "solution.py 构建指南",
-      "path": "solution_guide/solution_build_guide.md",
+      "path": "solution_guide/",
       "type": "doc",
-      "desc": "obs/action contract, sensor index map (proprio/extero/image), velocity-command dispatch, packaging.",
-      "desc_zh": "obs/action 接口约定、传感器索引表（proprio/extero/图像）、速度指令派发、打包方式。"
-    },
-    {
-      "name": "Solution template",
-      "name_zh": "solution.py 模板",
-      "path": "solution_guide/solution_template.py",
-      "type": "code",
-      "desc": "Copy-paste AlgSolution starting point (runs as zero-action).",
-      "desc_zh": "可直接复用的 AlgSolution 起始模板（默认以零动作运行）。"
-    },
-    {
-      "name": "Obs schema (SSOT)",
-      "name_zh": "观测 schema（SSOT）",
-      "path": "solution_guide/obs_schema.py",
-      "type": "code",
-      "desc": "Authoritative obs <-> wire (de)serialization; shared with the eval side.",
-      "desc_zh": "权威的 obs ↔ 网络传输（反）序列化定义，与评测端共用同一份。"
+      "entry": "solution_guide/solution_build_guide.md",
+      "desc": "Full solution.py resource pack: build guide, starting template, obs schema (SSOT) and requirements.txt.",
+      "desc_zh": "solution.py 完整资源包下载：构建指南、起始模板、观测 schema（SSOT）与 requirements.txt。"
     }
   ]
 }
