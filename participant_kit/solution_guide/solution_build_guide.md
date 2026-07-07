@@ -105,6 +105,30 @@ ee_depth   = images.get("ee_depth")        # 仅 TRON2
 通用规则：`joint_pos = proprio[12 : 12+N]`、`joint_vel = proprio[12+N : 12+2N]`、
 `last_action = proprio[12+2N : 12+3N]`，其中 `N = action_dim = (D-12)//3`。
 
+18 个关节通道的顺序 = 机器人固定的 `joint_names`（`joint_pos` / `joint_vel` / `last_action` 同序，
+**也是你从 `predicts` 返回的 18 维动作的顺序**）。**sfyg 与 wfyg 不同**——wfyg 把双踝换成双轮、且轮夹在腿与臂之间：
+
+```python
+# sfyg（18 = 腿 10 + 臂 8）
+TRON2A_SFYG_JOINT_NAMES = [
+    # 腿 0-9
+    "proximal_pitch_L_Joint", "proximal_roll_L_Joint", "proximal_yaw_L_Joint", "knee_L_Joint", "ankle_pitch_L_Joint",
+    "proximal_pitch_R_Joint", "proximal_roll_R_Joint", "proximal_yaw_R_Joint", "knee_R_Joint", "ankle_pitch_R_Joint",
+    # 臂 10-17
+    "arm1_Joint", "arm2_Joint", "arm3_Joint", "arm4_Joint", "arm5_Joint", "arm6_Joint", "gripper1_Joint", "gripper2_Joint",
+]
+# wfyg（18 = 腿 8 + 轮 2 + 臂 8；腿部无踝）
+TRON2A_WFYG_JOINT_NAMES = [
+    # 腿 0-7
+    "proximal_pitch_L_Joint", "proximal_roll_L_Joint", "proximal_yaw_L_Joint", "knee_L_Joint",
+    "proximal_pitch_R_Joint", "proximal_roll_R_Joint", "proximal_yaw_R_Joint", "knee_R_Joint",
+    # 轮 8-9
+    "wheel_L_Joint", "wheel_R_Joint",
+    # 臂 10-17
+    "arm1_Joint", "arm2_Joint", "arm3_Joint", "arm4_Joint", "arm5_Joint", "arm6_Joint", "gripper1_Joint", "gripper2_Joint",
+]
+```
+
 **Oli —— 106 维（`action_dim = 31`）：** 与 TRON2 同构 —— **带 `base_lin_vel`**（作为速度传感器
 通道），但速度指令是 **4 维**的。关节顺序由机器人固定（serial `OLI_EDU_JOINT_NAMES`）：
 
@@ -121,6 +145,30 @@ ee_depth   = images.get("ee_depth")        # 仅 TRON2
 因此 `joint_pos = proprio[13 : 13+N]`、`joint_vel = proprio[13+N : 13+2N]`、
 `last_action = proprio[13+2N : 13+3N]`，其中 `N = action_dim = (D - 13) // 3 = 31`。
 
+`OLI_EDU_JOINT_NAMES`（31，机器人固定顺序）—— `joint_pos` / `joint_vel` / `last_action` 的通道顺序、
+以及 `get_action_spec` 里 `stiffness` / `damping` 列表的顺序，**都**按此序：
+
+```python
+OLI_EDU_JOINT_NAMES = [
+    # 左腿 0-5
+    "left_hip_pitch_joint", "left_hip_roll_joint", "left_hip_yaw_joint",
+    "left_knee_joint", "left_ankle_pitch_joint", "left_ankle_roll_joint",
+    # 右腿 6-11
+    "right_hip_pitch_joint", "right_hip_roll_joint", "right_hip_yaw_joint",
+    "right_knee_joint", "right_ankle_pitch_joint", "right_ankle_roll_joint",
+    # 腰 12-14
+    "waist_yaw_joint", "waist_roll_joint", "waist_pitch_joint",
+    # 头 15-16
+    "head_yaw_joint", "head_pitch_joint",
+    # 左臂 17-23
+    "left_shoulder_pitch_joint", "left_shoulder_roll_joint", "left_shoulder_yaw_joint",
+    "left_elbow_joint", "left_wrist_yaw_joint", "left_wrist_pitch_joint", "left_wrist_roll_joint",
+    # 右臂 24-30
+    "right_shoulder_pitch_joint", "right_shoulder_roll_joint", "right_shoulder_yaw_joint",
+    "right_elbow_joint", "right_wrist_yaw_joint", "right_wrist_pitch_joint", "right_wrist_roll_joint",
+]
+```
+
 > **proprio 为原始真值（未做预缩放）**：线速度 / 角速度单位 m·s⁻¹ / rad·s⁻¹，`joint_pos` 为相对默认站姿的
 > 弧度差，`joint_vel` 为 rad·s⁻¹。是否归一化、用什么尺度，由你自行决定（评测不预设缩放系数）。
 
@@ -134,6 +182,11 @@ ee_depth   = images.get("ee_depth")        # 仅 TRON2
 ---
 
 ## 4. 动作规格 —— `get_action_spec()`
+
+你从 `predicts` 返回的 `action` 是长度 `action_dim` 的扁平向量，**按 §3 的固定关节顺序**排列，并顺次切成各
+动作分组——TRON2 为 `leg (+ wheel) + arm`（sfyg：腿 10 + 臂 8；wfyg：腿 8 + 轮 2 + 臂 8），Oli 为单一
+`leg`（全 31）。`get_action_spec()` 只决定每个分组*如何*被解释（`mode`/`scale`/`clip`/PD），**不改变这个顺序**；
+若你的 policy 内部关节序与此不同，在 `predicts` 里把网络输出重映射到 §3 的固定顺序后再返回。
 
 返回 `None`/`{}` 使用官方默认值，或按分组覆盖：
 
@@ -154,7 +207,67 @@ DEFAULT = {
   `kp∈[0,1000]`、`kd∈[0,100]`。**力矩上限不可改**（真机规格，见下）。位置控制策略与训练时的 PD 强相关——
   想复现你的步态，请用这两个键把训练 PD 一并声明。
 - 你设定动作向量*如何*被解释；而**关节顺序由机器人固定**。如果你的 policy 是按不同的内部关节顺序
-  训练的，请在 `predicts` 内部重映射（见 wfyg 参考实现的 `_map_action`）。
+  训练的，请在 `predicts` 内部把输出重映射到 §3 的固定顺序。
+
+#### PD 覆盖示例（`stiffness` / `damping`）
+
+列表**必须按机器人固定的关节顺序**逐关节给值（长度 = 该组关节数）。下面这些顺序就是评测施加动作的顺序：
+
+| 机器人·分组 | 关节数 | 固定顺序（列表第 0…N-1 项） |
+| --- | --- | --- |
+| TRON2 `leg`（sfyg / 有踝） | 10 | `proximal_pitch_L, proximal_roll_L, proximal_yaw_L, knee_L, ankle_pitch_L,` `proximal_pitch_R, proximal_roll_R, proximal_yaw_R, knee_R, ankle_pitch_R` |
+| TRON2 `leg`（wfyg / 双轮，无踝） | 8 | `proximal_pitch_L, proximal_roll_L, proximal_yaw_L, knee_L,` `proximal_pitch_R, proximal_roll_R, proximal_yaw_R, knee_R` |
+| TRON2 `arm`（sfyg & wfyg） | 8 | `arm1, arm2, arm3, arm4, arm5, arm6, gripper1, gripper2` |
+| TRON2 `wheel`（**仅 wfyg**） | 2 | `wheel_L, wheel_R` |
+| Oli `leg`（**唯一分组，全 31 关节**） | 31 | `OLI_EDU_JOINT_NAMES`（见 §3） |
+
+> 上表 TRON2 关节名省略了 `_Joint` 后缀（如 `proximal_pitch_L` 即 `proximal_pitch_L_Joint`、`wheel_L` 即
+> `wheel_L_Joint`）；完整名与 sfyg/wfyg 的 18 维整体顺序见 §3。PD 列表是**按分组**给值（`leg` / `arm` / `wheel`
+> 各自一段），与 proprio 的 18 维扁平顺序对应关系也在 §3。
+
+只需给你想改的分组填 `stiffness`/`damping`；没填的分组、以及没填的键，都保持"默认 PD"。**手写扁平列表极易错序**——
+推荐用"关节名 → (kp, kd)"字典、再按固定顺序展开，从根上杜绝错位：
+
+```python
+# 例：TRON2（sfyg）把腿部 PD 换成你自己训练用的那套；臂/轮不动 -> 用默认。
+# 下面的数值即评测默认（腿·大 159.67/10.16、腿·小 53.22/3.39），把它们替换成你的训练 PD 即可。
+LEG_ORDER = [  # 必须与上表 TRON2 leg(10) 一致
+    "proximal_pitch_L", "proximal_roll_L", "proximal_yaw_L", "knee_L", "ankle_pitch_L",
+    "proximal_pitch_R", "proximal_roll_R", "proximal_yaw_R", "knee_R", "ankle_pitch_R",
+]
+LEG_PD = {  # 关节名 -> (kp, kd)；左右同构只写一次
+    "proximal_pitch": (159.67, 10.16), "proximal_roll": (159.67, 10.16), "knee": (159.67, 10.16),
+    "proximal_yaw":   (53.22,  3.39),  "ankle_pitch":   (53.22,  3.39),
+}
+def _pd(joint):                       # "proximal_pitch_L" -> LEG_PD["proximal_pitch"]
+    return LEG_PD[joint.rsplit("_", 1)[0]]
+
+def get_action_spec(self):
+    stiffness = [_pd(j)[0] for j in LEG_ORDER]   # 长度 10，按固定顺序
+    damping   = [_pd(j)[1] for j in LEG_ORDER]
+    return {"leg": {"mode": "position", "scale": 0.5,
+                    "stiffness": stiffness, "damping": damping}}
+    # 等价于（可直接照抄再改数）：
+    # "stiffness": [159.67,159.67,53.22,159.67,53.22, 159.67,159.67,53.22,159.67,53.22]
+    # "damping":   [ 10.16, 10.16, 3.39, 10.16, 3.39,  10.16, 10.16, 3.39, 10.16, 3.39]
+```
+
+```python
+# 例：Oli（唯一分组 "leg" 涵盖全部 31 关节）声明你训练用的逐关节 PD。
+# OLI_EDU_JOINT_NAMES 直接照抄 §3 的 31 个名字（不要 import atec_rl_lab——选手容器里通常没有）。
+OLI_EDU_JOINT_NAMES = [ ... 见 §3 的 31 个关节，按该顺序 ... ]
+MY_KP = { ... }   # 关节名 -> kp，覆盖全部 31 个（可参照下表"推荐 PD"起步）
+MY_KD = { ... }   # 关节名 -> kd
+def get_action_spec(self):
+    return {"leg": {
+        "stiffness": [MY_KP[j] for j in OLI_EDU_JOINT_NAMES],   # 长度 31，按固定顺序
+        "damping":   [MY_KD[j] for j in OLI_EDU_JOINT_NAMES],
+    }}
+```
+
+约束回顾：`kp∈[0,1000]`、`kd∈[0,100]`；长度必须**恰好等于**该组关节数（多/少一个都会被判 failed）；
+`stiffness`/`damping` 缺省即用下表默认；**力矩上限不可改**。**所有开放构型的所有分组都支持逐关节覆盖**：
+TRON2 **sfyg**（`leg` 10 / `arm` 8）、**wfyg**（`leg` 8 / `arm` 8 / `wheel` 2）与 **Oli Edu**（`leg` 31），放心声明。
 
 ### Oli 推荐 / 默认 PD、默认姿态、力矩上限
 
