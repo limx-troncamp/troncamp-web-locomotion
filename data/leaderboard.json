@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-07T15:01:48+08:00",
+  "generated_at": "2026-07-07T15:12:58+08:00",
   "deadline": "2026-07-15T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -31,6 +31,31 @@
       "token": "3216118fc550"
     },
     {
+      "team": "e1ba3abf080f",
+      "display": "__oZOg",
+      "variant": "Tron2ALegged",
+      "total": 3.9744,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 11.624042510986328,
+        "base": 6.974425315856934,
+        "time_bonus": 0.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 0.0,
+        "boundary_penalty": -3.0,
+        "arm_assist_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "finished": 0.0,
+        "elapsed_finish": 600.0,
+        "total": 3.9744253158569336
+      },
+      "last_submit": "2026-07-07T15:09:35+08:00",
+      "n_submissions": 2,
+      "rank": 2,
+      "token": "e1ba3abf080f"
+    },
+    {
       "team": "a30d3854dc1b",
       "display": "BssSVQ",
       "variant": "Tron2ALegged",
@@ -52,7 +77,7 @@
       },
       "last_submit": "2026-07-07T14:58:26+08:00",
       "n_submissions": 3,
-      "rank": 2,
+      "rank": 3,
       "token": "a30d3854dc1b"
     },
     {
@@ -77,33 +102,8 @@
       },
       "last_submit": "2026-07-07T11:55:19+08:00",
       "n_submissions": 2,
-      "rank": 3,
-      "token": "aa5706b531e6"
-    },
-    {
-      "team": "e1ba3abf080f",
-      "display": "__oZOg",
-      "variant": "Tron2ALegged",
-      "total": 0.6001,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 1.0002403259277344,
-        "base": 0.6001441478729248,
-        "time_bonus": 0.0,
-        "no_fall_bonus": 0.0,
-        "recover_bonus": 0.0,
-        "boundary_penalty": -0.0,
-        "arm_assist_bonus": 0.0,
-        "platforms_assisted": 0.0,
-        "finished": 0.0,
-        "elapsed_finish": 600.0,
-        "total": 0.6001441478729248
-      },
-      "last_submit": "2026-07-05T01:19:08+08:00",
-      "n_submissions": 1,
       "rank": 4,
-      "token": "e1ba3abf080f"
+      "token": "aa5706b531e6"
     }
   ],
   "final": []
