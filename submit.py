@@ -184,6 +184,15 @@ def _fmt_mmss(seconds: float) -> str:
     return f"{s // 60:02d}:{s % 60:02d}"
 
 
+def _fmt_num(v) -> str:
+    """得分构成数值：整数不带 .0（3 而非 3.0），小数原样（92.5、0.8）。非数值原样返回。"""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return str(v)
+    return f"{f:g}"
+
+
 def _icon_and_body(sub: dict) -> tuple[str, str]:
     """一条提交 → (图标, 中文正文)。评测阶段失败按 stage 映射，绝不显示日志。"""
     status = sub.get("status", "queued")
@@ -210,7 +219,11 @@ def _icon_and_body(sub: dict) -> tuple[str, str]:
         total = sub.get("total")
         robot = sub.get("robot")
         tail = f"（{robot}）" if robot else ""
-        return "✓", (f"完成！得分 {total}{tail}" if total is not None else f"完成{tail}")
+        head = f"完成！得分 {total}{tail}" if total is not None else f"完成{tail}"
+        # 得分构成：标签由网关映射好（中文、无内部字段名），此处只渲染；老提交无 score_detail → 只显示总分。
+        for it in sub.get("score_detail") or []:
+            head += f"\n{it.get('label', '?')}  {_fmt_num(it.get('value'))}"
+        return "✓", head
     if status == "failed":
         base = STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
         body = "失败 · " + base
@@ -219,7 +232,7 @@ def _icon_and_body(sub: dict) -> tuple[str, str]:
         # 运行」，或 eval 无消息时回退的「评测运行中出错」）不重复展示。timeout/env/deps 内部日志仍不外泄。
         err = sub.get("error")
         if sub.get("stage") in ("solution", "serve", "eval") and err and err not in base:
-            body += f"\n         ↳ {err}"
+            body += f"\n↳ {err}"
         return "✗", body
     if status == "rejected":
         return "✗", "已拒绝 · " + (sub.get("error") or "提交被拒绝")
@@ -230,7 +243,13 @@ def _status_line(sub: dict) -> str:
     icon, body = _icon_and_body(sub)
     comp = sub.get("competition") or "?"
     sid = sub.get("submission_id", "?")
-    return f"  {sid}  {icon} {body}   [{comp}]"
+    prefix = f"  {sid}  {icon} "
+    first, sep, rest = body.partition("\n")
+    line = f"{prefix}{first}   [{comp}]"
+    if sep:
+        pad = " " * len(prefix)
+        line += "\n" + "\n".join(pad + ln for ln in rest.split("\n"))
+    return line
 
 
 # ----------------------------- 轮询等待 -----------------------------
