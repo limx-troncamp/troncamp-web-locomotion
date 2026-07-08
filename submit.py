@@ -214,10 +214,11 @@ def _icon_and_body(sub: dict) -> tuple[str, str]:
     if status == "failed":
         base = STAGE_ZH.get(sub.get("stage"), _STAGE_FALLBACK)
         body = "失败 · " + base
-        # 选手自身问题（solution 运行时 / serve 启动/导入）透传确切异常供其自查；与 STAGE_ZH 重复的通用
-        # 兜底（如「提交的代码无法运行」）不重复展示；其它环节（env/eval/timeout）的内部日志不外泄。
+        # 透传确切异常供选手自查：solution 运行时 / serve 启动导入 / eval 回合运行时（env.step 抛错，
+        # 如动作维度不符）。绝对路径已在 worker 侧抹除；与 STAGE_ZH 通用兜底重复的（如「提交的代码无法
+        # 运行」，或 eval 无消息时回退的「评测运行中出错」）不重复展示。timeout/env/deps 内部日志仍不外泄。
         err = sub.get("error")
-        if sub.get("stage") in ("solution", "serve") and err and err not in base:
+        if sub.get("stage") in ("solution", "serve", "eval") and err and err not in base:
             body += f"\n         ↳ {err}"
         return "✗", body
     if status == "rejected":
