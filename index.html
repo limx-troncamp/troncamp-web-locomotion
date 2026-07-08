@@ -93,14 +93,14 @@
         <tr><td class="lvl">S5</td><td>上楼梯段</td><td>10 m</td><td>阶高 <b>10–20 cm</b>（随机），阶宽 <b>30 cm</b>，共 6–10 级</td></tr>
         <tr><td class="lvl">S6</td><td>下楼梯段</td><td>10 m</td><td>对称布置</td></tr>
         <tr><td class="lvl">S7</td><td>平地段</td><td>10 m</td><td>平整地面</td></tr>
-        <tr><td class="lvl">S8</td><td>变台跨越段</td><td>17 m</td><td><b>3 个高台</b>，高度依次 <b>20 / 30 / 40 cm</b>，台面 <b>0.8m × 1.0m</b>，<b>不可推动</b>（只能跨越）</td></tr>
+        <tr><td class="lvl">S8</td><td>变台跨越段</td><td>17 m</td><td><b>3 个高台</b>，高度依次 <b>20 / 30 / 40 cm</b>，台面 <b>0.8m × 1.0m</b>，<b>不可推动</b></td></tr>
         <tr><td class="lvl">终点</td><td>终点段</td><td>4 m</td><td>平地，含终点感应线</td></tr>
       </tbody>
     </table>
 
     <div class="sec-head" style="margin-top:2.4rem;margin-bottom:1rem">
       <h2 style="font-size:1.3rem">计分（满分 100 · 距离 × 速度 + 协同奖励）</h2>
-      <p>主成绩看走多远、多快；在此之上，locomotion 的协同行为（不跌倒 / 跌倒自恢复、手臂辅撑攀台）额外加分，越界扣分。</p>
+      <p>主成绩看走多远、多快；在此之上，locomotion 的协同行为（不跌倒 / 跌倒自恢复、攀越 S8 高台——借臂档分更高）额外加分，越界扣分。</p>
     </div>
     <div class="formula">
       基础分 = <span class="accent">D_eff / 100 m × 60</span>
@@ -113,11 +113,13 @@
     <table class="dtable" style="margin-top:1.4rem">
       <thead><tr><th>协同奖励 / 罚则（协同奖励上限 +20）</th><th style="width:14rem">检测方式</th><th style="width:8rem">分值</th></tr></thead>
       <tbody>
-        <tr><td>跨越高台时手臂辅撑攀爬</td><td>末端施力 + 高度变化</td><td><b>+4 / 台</b>（≤ 3 台）</td></tr>
+        <tr><td>跨越 S8 高台 · <b>借臂跨越</b>（逐台计分，按高 0.2 / 0.3 / 0.4 m）</td><td>末端施力 + 质心攀升</td><td><b>+4 / +5 / +6</b></td></tr>
+        <tr><td>跨越 S8 高台 · <b>仅腿跨越</b>（同上；每台两档互斥取其一）</td><td>质心攀升（无臂支撑）</td><td><b>+2 / +2 / +3</b></td></tr>
         <tr><td>未跌倒 / 跌倒后自主爬起（二者取一）</td><td>全程零跌倒 / 跌倒自恢复</td><td><b>+5</b></td></tr>
         <tr><td>越出 3m 计分走廊（|y| &gt; 1.5m）</td><td>每次越界</td><td><b>−3 / 次</b></td></tr>
       </tbody>
     </table>
+    <p style="margin-top:0.9rem;color:var(--muted);font-size:0.9rem">借臂跨越三个高台（+15）叠加未跌倒 / 跌倒恢复（+5），总分 60 + 20 + 5 + 15 可达满分 <b style="color:var(--text)">100</b>；仅腿跨越三个高台为 92。绕过高台不获得高台协同奖励。</p>
     <p style="margin-top:0.9rem;color:var(--muted);font-size:0.9rem"><b style="color:var(--text)">机型</b>：TRON 2 <b>腿式 sfyg（得分权重 ×1.0）</b> / <b>轮式 wfyg（得分权重 ×0.8）</b>，含 REAL / ORIG 传感变体。单局限时 <b>600s</b>，跌倒不终止、可自主恢复。</p>
   </div>
 </section>
@@ -181,7 +183,7 @@
 
     <div class="sec-head" style="margin-top:1.8rem;margin-bottom:0.8rem">
       <h2 style="font-size:1.3rem">① 准备工具</h2>
-      <p>下载提交工具 <code>submit.py</code>。<code>&lt;队伍令牌&gt;</code> 由主办方私发。<b>令牌可能以 <code>-</code> 开头，命令里务必用等号形式 <code>--token=&lt;队伍令牌&gt;</code></b>（否则会被解析成选项）。</p>
+      <p>下载提交工具 <code>submit.py</code>。<b>2026-07-08 起 <code>submit.py</code> 已升级（状态查询增强），老用户请重新下载覆盖旧版。</b><code>&lt;队伍令牌&gt;</code> 由主办方私发。<b>令牌可能以 <code>-</code> 开头，命令里务必用等号形式 <code>--token=&lt;队伍令牌&gt;</code></b>（否则会被解析成选项）。</p>
     </div>
     <div class="code"><span class="c"># 下载提交工具（单文件，零依赖）</span>
 wget https://limx-troncamp.github.io/troncamp-web-locomotion/submit.py</div>
@@ -201,7 +203,7 @@ python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.l
 
     <div class="sec-head" style="margin-top:2rem;margin-bottom:0.8rem">
       <h2 style="font-size:1.3rem">③ 查询</h2>
-      <p>查本队各次提交的状态与分数（queued / done / failed + 总分）。</p>
+      <p>查本队各次提交的状态与分数（排队 / 评测中 / 完成 / 失败 + 总分与得分构成；评测失败会展示确切报错原因）。</p>
     </div>
     <div class="code"><span class="c"># 查询本队提交状态与分数</span>
 python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.limxdynamics.com <span class="a">--token=</span>&lt;队伍令牌&gt; <span class="a">--status</span></div>
@@ -243,6 +245,20 @@ python3 submit.py <span class="a">--server</span> https://submit.troncamp-loco.l
       <li>整体时长请<b>控制在 3 分钟以内</b></li>
       <li>邮件命名格式：<b>姓名-专属提交码-赛道名称</b>（示例：张三-Token-Locomotion）</li>
     </ul>
+  </div>
+</section>
+
+<!-- ───────── 公告（独立模块，无编号） ───────── -->
+<section id="notice" style="padding:2.6rem 0">
+  <div class="wrap">
+    <div class="card" style="border-color:var(--accent-dim)">
+      <div style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.6rem">公告 · 2026-07-08</div>
+      <ul class="reqs" style="margin-top:1rem">
+        <li><b>提交截止延至 2026 年 7 月 20 日 24:00</b>（北京时间）。</li>
+        <li><b>status 查询升级</b>：请重新下载最新 <code>submit.py</code>（覆盖旧版）。之后查询 <code>status</code> 可查看「评测中」状态与得分构成，评测中失败会展示具体报错原因。</li>
+        <li><b>TRON赛题 S8 高台协同奖励评分更新</b>——借臂跨越 +4 / +5 / +6，仅腿跨越 +2 / +2 / +3（按高台 0.2 / 0.3 / 0.4 m 升序）。详见 <a href="#tron">TRON 计分表</a>。</li>
+      </ul>
+    </div>
   </div>
 </section>
 
