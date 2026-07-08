@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-08T18:14:31+08:00",
+  "generated_at": "2026-07-08T19:18:21+08:00",
   "deadline": "2026-07-15T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -56,6 +56,31 @@
       "token": "aa5706b531e6"
     },
     {
+      "team": "b272bbcfa1fd",
+      "display": "yniQIg",
+      "variant": "Tron2ALegged",
+      "total": 28.0665,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 43.44415283203125,
+        "base": 26.066490173339844,
+        "time_bonus": 0.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 5.0,
+        "boundary_penalty": -3.0,
+        "arm_assist_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "finished": 0.0,
+        "elapsed_finish": 600.0,
+        "total": 28.066490173339844
+      },
+      "last_submit": "2026-07-08T18:53:13+08:00",
+      "n_submissions": 3,
+      "rank": 3,
+      "token": "b272bbcfa1fd"
+    },
+    {
       "team": "3216118fc550",
       "display": "C0PlEA",
       "variant": "Tron2ALegged",
@@ -77,33 +102,8 @@
       },
       "last_submit": "2026-07-07T09:53:42+08:00",
       "n_submissions": 2,
-      "rank": 3,
-      "token": "3216118fc550"
-    },
-    {
-      "team": "b272bbcfa1fd",
-      "display": "yniQIg",
-      "variant": "Tron2ALegged",
-      "total": 5.5986,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 0.9977149963378906,
-        "base": 0.5986289978027344,
-        "time_bonus": 0.0,
-        "no_fall_bonus": 5.0,
-        "recover_bonus": 0.0,
-        "boundary_penalty": -0.0,
-        "arm_assist_bonus": 0.0,
-        "platforms_assisted": 0.0,
-        "finished": 0.0,
-        "elapsed_finish": 600.0,
-        "total": 5.598628997802734
-      },
-      "last_submit": "2026-07-08T15:06:22+08:00",
-      "n_submissions": 2,
       "rank": 4,
-      "token": "b272bbcfa1fd"
+      "token": "3216118fc550"
     },
     {
       "team": "e1ba3abf080f",
