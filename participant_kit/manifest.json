@@ -32,7 +32,7 @@
       "group": "humanoid",
       "url": "https://github.com/limxdynamics/humanoid-description",
       "desc": "Oli humanoid (serial) robot description — the model used by the evaluator.",
-      "desc_zh": "Oli 人形（串联）机器人描述（URDF / 网格 / 配置）；评测即采用该串联模型。"
+      "desc_zh": "Oli 人形（串联）机器人描述（URDF / 网格 / 配置）；评测即采用该串联模型(统一使用 HU_D04_description 最新的a90f734c153的commit)。"
     },
     {
       "name": "humanoid-rl-deploy-python",
