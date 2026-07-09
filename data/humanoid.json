@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-09T17:25:36+08:00",
+  "generated_at": "2026-07-09T17:48:11+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -58,6 +58,32 @@
       "token": "00aa18c1f2c0"
     },
     {
+      "team": "2059d9d972f2",
+      "display": "VqSsAg",
+      "variant": "OliEdu",
+      "total": 0.0033,
+      "robot_type": "oli",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 0.002685546875,
+        "base": 0.0033052884973585606,
+        "time_bonus": 0.0,
+        "boundary_penalty": -0.0,
+        "scuff_penalty": -0.0,
+        "fall_penalty": -0.0,
+        "boundary_crossings": 0.0,
+        "scuffs": 0.0,
+        "falls": 3.0,
+        "finished": 0.0,
+        "elapsed_finish": 720.0,
+        "total": 0.0033052884973585606
+      },
+      "last_submit": "2026-07-09T17:27:42+08:00",
+      "n_submissions": 2,
+      "rank": 3,
+      "token": "2059d9d972f2"
+    },
+    {
       "team": "e6c9ead212c4",
       "display": "R0_ybQ",
       "variant": "OliEdu",
@@ -80,7 +106,7 @@
       },
       "last_submit": "2026-07-08T20:38:19+08:00",
       "n_submissions": 1,
-      "rank": 3,
+      "rank": 4,
       "token": "e6c9ead212c4"
     },
     {
@@ -106,34 +132,8 @@
       },
       "last_submit": "2026-07-09T15:19:52+08:00",
       "n_submissions": 3,
-      "rank": 4,
-      "token": "e8a6438370c1"
-    },
-    {
-      "team": "2059d9d972f2",
-      "display": "VqSsAg",
-      "variant": "OliEdu",
-      "total": 0.0,
-      "robot_type": "oli",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 0.009063720703125,
-        "base": 0.011155348271131516,
-        "time_bonus": 0.0,
-        "boundary_penalty": -3.0,
-        "scuff_penalty": -0.0,
-        "fall_penalty": -0.0,
-        "boundary_crossings": 1.0,
-        "scuffs": 0.0,
-        "falls": 1.0,
-        "finished": 0.0,
-        "elapsed_finish": 720.0,
-        "total": 0.0
-      },
-      "last_submit": "2026-07-09T17:01:47+08:00",
-      "n_submissions": 1,
       "rank": 5,
-      "token": "2059d9d972f2"
+      "token": "e8a6438370c1"
     }
   ],
   "final": []
