@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-13T15:28:02+08:00",
+  "generated_at": "2026-07-13T17:03:36+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -135,6 +135,32 @@
       "token": "5ac24ef4cae6"
     },
     {
+      "team": "64c1e8416e8a",
+      "display": "n3FaNw",
+      "variant": "Tron2ALegged",
+      "total": 33.9794,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 56.632320404052734,
+        "base": 33.979393005371094,
+        "time_bonus": 0.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 0.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 0.0,
+        "finished": 0.0,
+        "elapsed_finish": 600.0,
+        "total": 33.979393005371094
+      },
+      "last_submit": "2026-07-13T15:41:23+08:00",
+      "n_submissions": 1,
+      "rank": 6,
+      "token": "64c1e8416e8a"
+    },
+    {
       "team": "b272bbcfa1fd",
       "display": "yniQIg",
       "variant": "Tron2ALegged",
@@ -157,7 +183,7 @@
       },
       "last_submit": "2026-07-11T22:13:38+08:00",
       "n_submissions": 7,
-      "rank": 6,
+      "rank": 7,
       "token": "b272bbcfa1fd"
     },
     {
@@ -183,7 +209,7 @@
       },
       "last_submit": "2026-07-13T01:12:36+08:00",
       "n_submissions": 2,
-      "rank": 7,
+      "rank": 8,
       "token": "e053bf790b9c"
     },
     {
@@ -209,7 +235,7 @@
       },
       "last_submit": "2026-07-13T07:51:10+08:00",
       "n_submissions": 2,
-      "rank": 8,
+      "rank": 9,
       "token": "4e5c1a4505f8"
     },
     {
@@ -234,7 +260,7 @@
       },
       "last_submit": "2026-07-11T16:50:28+08:00",
       "n_submissions": 3,
-      "rank": 9,
+      "rank": 10,
       "token": "3216118fc550"
     },
     {
@@ -260,7 +286,7 @@
       },
       "last_submit": "2026-07-13T14:28:51+08:00",
       "n_submissions": 6,
-      "rank": 10,
+      "rank": 11,
       "token": "171018fff874"
     },
     {
@@ -286,7 +312,7 @@
       },
       "last_submit": "2026-07-13T15:02:52+08:00",
       "n_submissions": 1,
-      "rank": 11,
+      "rank": 12,
       "token": "66fb8bcad323"
     },
     {
@@ -311,7 +337,7 @@
       },
       "last_submit": "2026-07-07T15:09:35+08:00",
       "n_submissions": 2,
-      "rank": 12,
+      "rank": 13,
       "token": "e1ba3abf080f"
     },
     {
@@ -336,7 +362,7 @@
       },
       "last_submit": "2026-07-08T00:34:44+08:00",
       "n_submissions": 1,
-      "rank": 13,
+      "rank": 14,
       "token": "e6c9ead212c4"
     },
     {
@@ -362,7 +388,7 @@
       },
       "last_submit": "2026-07-13T08:52:48+08:00",
       "n_submissions": 4,
-      "rank": 14,
+      "rank": 15,
       "token": "efa041654757"
     }
   ],
