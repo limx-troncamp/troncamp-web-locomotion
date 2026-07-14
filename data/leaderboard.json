@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-14T17:01:42+08:00",
+  "generated_at": "2026-07-14T18:17:49+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -32,32 +32,6 @@
       "token": "a30d3854dc1b"
     },
     {
-      "team": "09722736922c",
-      "display": "dLyaAA",
-      "variant": "Tron2ALegged",
-      "total": 92.0,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 100.0,
-        "base": 60.0,
-        "time_bonus": 20.0,
-        "no_fall_bonus": 0.0,
-        "recover_bonus": 5.0,
-        "boundary_penalty": -0.0,
-        "cross_platform_bonus": 7.0,
-        "platforms_assisted": 0.0,
-        "platforms_crossed": 3.0,
-        "finished": 1.0,
-        "elapsed_finish": 230.95999145507812,
-        "total": 92.0
-      },
-      "last_submit": "2026-07-13T12:13:14+08:00",
-      "n_submissions": 3,
-      "rank": 2,
-      "token": "09722736922c"
-    },
-    {
       "team": "0178497dd49f",
       "display": "K_cumQ",
       "variant": "Tron2ALegged",
@@ -80,7 +54,7 @@
       },
       "last_submit": "2026-07-13T14:16:11+08:00",
       "n_submissions": 3,
-      "rank": 3,
+      "rank": 2,
       "token": "0178497dd49f"
     },
     {
@@ -106,8 +80,34 @@
       },
       "last_submit": "2026-07-13T20:48:35+08:00",
       "n_submissions": 5,
-      "rank": 4,
+      "rank": 3,
       "token": "aa5706b531e6"
+    },
+    {
+      "team": "09722736922c",
+      "display": "dLyaAA",
+      "variant": "Tron2ALegged",
+      "total": 92.0,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 100.0,
+        "base": 60.0,
+        "time_bonus": 20.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 5.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 7.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 3.0,
+        "finished": 1.0,
+        "elapsed_finish": 230.95999145507812,
+        "total": 92.0
+      },
+      "last_submit": "2026-07-13T12:13:14+08:00",
+      "n_submissions": 3,
+      "rank": 4,
+      "token": "09722736922c"
     },
     {
       "team": "9d930edb9a91",
@@ -130,8 +130,8 @@
         "elapsed_finish": 600.0,
         "total": 55.85807418823242
       },
-      "last_submit": "2026-07-14T16:36:35+08:00",
-      "n_submissions": 1,
+      "last_submit": "2026-07-14T17:52:41+08:00",
+      "n_submissions": 2,
       "rank": 5,
       "token": "9d930edb9a91"
     },
