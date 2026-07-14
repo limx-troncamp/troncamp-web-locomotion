@@ -92,7 +92,8 @@
       weight: raw.weight,
       total: raw.total,
       finished: !!b.finished,
-      elapsed: (b.elapsed_finish != null) ? b.elapsed_finish : null
+      elapsed: (b.elapsed_finish != null) ? b.elapsed_finish : null,
+      best_submit: raw.best_submit || raw.last_submit || ''
     };
   }
 
@@ -163,11 +164,23 @@
     tronRows = tronRows || [];
     humRows = humRows || [];
 
-    // 合并 + 统一排名：直接按 total 降序（total 已含权重），前端重排 rank。
+    // 合并 + 统一排名（与 worker/writeback.py:_rank_key 同一规则）：total 降序（已含权重）
+    // → 完赛优先 → 都完赛比用时（未完赛 elapsed 是各赛道封顶值 600/720，不可比）
+    // → best_submit 先达到者在前（老数据回退 last_submit）。前端重排 rank。
     var merged = tronRows.map(function (r) { return normalize(r, 'tron'); })
       .concat(humRows.map(function (r) { return normalize(r, 'humanoid'); }))
       .filter(function (r) { return r.total !== null && r.total !== undefined; });
-    merged.sort(function (a, b) { return (b.total || 0) - (a.total || 0); });
+    merged.sort(function (a, b) {
+      var d = (b.total || 0) - (a.total || 0);
+      if (d) return d;
+      d = (b.finished ? 1 : 0) - (a.finished ? 1 : 0);
+      if (d) return d;
+      if (a.finished && b.finished) {
+        d = (a.elapsed || 0) - (b.elapsed || 0);
+        if (d) return d;
+      }
+      return a.best_submit < b.best_submit ? -1 : a.best_submit > b.best_submit ? 1 : 0;
+    });
     merged.forEach(function (r, i) { r.rank = i + 1; });
 
     if (!merged.length) {
