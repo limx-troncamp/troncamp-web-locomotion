@@ -63,7 +63,24 @@ class AlgSolution:
   `ee_rgb/ee_depth`（末端手眼）。相机内外参见 README「传感器参考」。
 - **Oli**：仅头部**深度**（`head_depth`，`(1, 60, 106, 1)`）；无胸部相机、无 RGB、无 LiDAR `extero`。
 
-深度为度量值（m）；`inf → 0`。RGB 为 uint8 `HWC`。
+深度为度量值（**米**，`float32`），RGB 为 uint8 `HWC`。**两类机器人的深度语义不同，切勿套用同一套预处理**：
+
+| | TRON2 RGB-D | Oli `head_depth` |
+| --- | --- | --- |
+| **像素值的含义** | 见 README | **沿光轴的 z-深度**，**不是**到相机的直线距离（换算见下） |
+| 超出量程 / 无回波 | `inf → 0` | 返回**量程上限 `5.0`**，**不会**是 `0`/`inf`/`nan` |
+| `0` 的含义 | 无效 / 无回波 | **真实的极近距回波**（如摔倒后相机贴地）——不可当作「远」 |
+| 是否含机器人自身 | — | **否**，机器人不遮挡自己的视野，图像中不会出现躯干、手臂 |
+| 光轴 | 见 README | **前下俯视 30°**，相机高约 1.50 m → 图像内最近像素约 **1.53 m** 深 |
+
+> ⚠️ **z-深度 ≠ 径向距离。** `head_depth[v, u]` 是该点在相机系下的 **z 分量**（到成像平面的垂直距离）。
+> 到光心的直线距离为 `z / cos θ`（θ = 该像素光线与光轴夹角）。本相机视场很宽，图像**四角**的
+> θ 达 48.1°，径向距离是 z-深度的 **1.50 倍**——误当作径向距离会在角落低估约 50%。
+> 5.0 m 的量程上限同样是对 z-深度而言。
+
+> ⚠️ Oli 最常见的踩坑：把可用量程按「近处障碍」的直觉裁到 1.5 m 上下。由于俯视 30° + 头高 1.50 m，
+> **图像里最近的像素也有约 1.53 m**（对应脚前约 0.90 m 的地面），这样裁会把几乎整幅图判成
+> 「远 / 无信息」，视觉输入退化成常量。建议按 **0–5 m** 全量程归一化。完整外参/内参见 README「传感器参考」。
 
 ### 读取示例（在 `predicts(obs, ...)` 内）
 
@@ -74,7 +91,8 @@ extero = obs.get("extero")                 # (1, channels*360) 或 None
 if extero is not None:
     rings = extero.reshape(1, -1, 360)     # (1, channels, 360)
 
-# 深度图（exteroception）：obs["image"][<cam>]，形状 (1, H, W, 1)，单位米（inf 已置 0）。
+# 深度图（exteroception）：obs["image"][<cam>]，形状 (1, H, W, 1)，单位米。
+# 语义按机器人不同：TRON2 为 inf→0；Oli 的 head_depth 未命中/超距为 5.0（见上表）。
 images = obs.get("image") or {}            # 无相机的任务为 {}
 head_depth = images.get("head_depth")      # Oli (1,60,106,1) · TRON2 (1,480,640,1) 或 None
 ee_depth   = images.get("ee_depth")        # 仅 TRON2
@@ -254,7 +272,8 @@ def get_action_spec(self):
 
 ```python
 # 例：Oli（唯一分组 "leg" 涵盖全部 31 关节）声明你训练用的逐关节 PD。
-# OLI_EDU_JOINT_NAMES 直接照抄 §3 的 31 个名字（不要 import atec_rl_lab——选手容器里通常没有）。
+# 关节名请直接照抄 §3 列出的 31 个，按该顺序写死在你自己的代码里（评测容器只安装
+# requirements.txt 中声明的依赖，不要试图 import 评测侧的包）。
 OLI_EDU_JOINT_NAMES = [ ... 见 §3 的 31 个关节，按该顺序 ... ]
 MY_KP = { ... }   # 关节名 -> kp，覆盖全部 31 个（可参照下表"推荐 PD"起步）
 MY_KD = { ... }   # 关节名 -> kd

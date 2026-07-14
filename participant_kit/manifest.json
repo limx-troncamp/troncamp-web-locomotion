@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "updated_at": "2026-07-06",
+  "version": "1.4.1",
+  "updated_at": "2026-07-14",
   "title": "Participant kit — TronCamp (TRON2) & HumanoidCamp (Oli)",
   "title_zh": "选手资源包",
   "description": "Training terrain, solution.py build guide, and an optional-sensor (camera / LiDAR intrinsics + extrinsics) reference for the TronCamp / HumanoidCamp benchmarks.",

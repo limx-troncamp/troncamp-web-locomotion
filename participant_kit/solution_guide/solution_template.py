@@ -107,9 +107,17 @@ class AlgSolution:
         #     extero = torch.as_tensor(extero, dtype=torch.float32, device=self.device)
         #     rings = extero.reshape(1, -1, 360)       # (1, channels, 360) 逐环高度
         #
-        # 深度相机（exteroception）：obs["image"][<cam>]，形状 (1, H, W, 1)，单位米（inf 已置 0）。
+        # 深度相机（exteroception）：obs["image"][<cam>]，形状 (1, H, W, 1)，单位米。
         #   Oli：head_depth (1,60,106,1)。 TRON2：head_depth / ee_depth [/ down_depth] (1,480,640,1)，
         #   REAL 另有 *_rgb (1,480,640,3) uint8。
+        # 两者深度语义不同，勿套用同一套预处理（详见 solution_build_guide.md §2「图像 key」）：
+        #   TRON2：无回波 inf → 0。
+        #   Oli   ：像素值是「沿光轴的 z-深度」，不是到相机的直线距离（径向距离 = z / cosθ，
+        #           图像四角 θ=48.1° → 径向是 z 的 1.50 倍，误用会在角落低估约 50%）。
+        #           超出量程/无回波 → 5.0（该上限也是对 z-深度而言），不会是 0/inf/nan；
+        #           接近 0 是真实的极近距回波，不可当作「远」。相机前下俯视 30°、高约 1.50 m
+        #           → 图像内最近像素约 1.53 m 深，按 0–5 m 全量程归一化，切勿把量程裁到
+        #           1.5 m 上下（会全图饱和、视觉输入退化为常量）。
         images = obs.get("image") or {}               # {} 若该任务无相机
         head_depth = images.get("head_depth")         # (1, H, W, 1) 或 None
         # if head_depth is not None:
