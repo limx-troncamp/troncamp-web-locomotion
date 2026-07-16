@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-16T20:08:59+08:00",
+  "generated_at": "2026-07-16T20:34:00+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -534,12 +534,12 @@
       "team": "efa041654757",
       "display": "ELuFKg",
       "variant": "Tron2ALegged",
-      "total": 1.2234,
+      "total": 1.2864,
       "robot_type": "sfyg_tron2a",
       "weight": 1.0,
       "breakdown": {
-        "d_eff": 2.0389862060546875,
-        "base": 1.2233917713165283,
+        "d_eff": 2.1439247131347656,
+        "base": 1.2863547801971436,
         "time_bonus": 0.0,
         "no_fall_bonus": 0.0,
         "recover_bonus": 0.0,
@@ -549,11 +549,11 @@
         "platforms_crossed": 0.0,
         "finished": 0.0,
         "elapsed_finish": 600.0,
-        "total": 1.2233917713165283
+        "total": 1.2863547801971436
       },
-      "last_submit": "2026-07-15T19:03:52+08:00",
-      "best_submit": "2026-07-15T19:03:52+08:00",
-      "n_submissions": 6,
+      "last_submit": "2026-07-16T19:50:50+08:00",
+      "best_submit": "2026-07-16T19:50:50+08:00",
+      "n_submissions": 7,
       "rank": 21,
       "token": "efa041654757"
     },
