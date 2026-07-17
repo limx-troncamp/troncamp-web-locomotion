@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-17T02:37:13+08:00",
+  "generated_at": "2026-07-17T10:33:15+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -85,32 +85,6 @@
       "token": "0178497dd49f"
     },
     {
-      "team": "aa5706b531e6",
-      "display": "xOTtow",
-      "variant": "Tron2ALegged",
-      "total": 92.0,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 100.0,
-        "base": 60.0,
-        "time_bonus": 20.0,
-        "no_fall_bonus": 0.0,
-        "recover_bonus": 5.0,
-        "boundary_penalty": -0.0,
-        "cross_platform_bonus": 7.0,
-        "platforms_assisted": 0.0,
-        "platforms_crossed": 3.0,
-        "finished": 1.0,
-        "elapsed_finish": 129.1199951171875,
-        "total": 92.0
-      },
-      "last_submit": "2026-07-16T22:23:52+08:00",
-      "n_submissions": 6,
-      "rank": 4,
-      "token": "aa5706b531e6"
-    },
-    {
       "team": "09722736922c",
       "display": "dLyaAA",
       "variant": "Tron2ALegged",
@@ -133,8 +107,35 @@
       },
       "last_submit": "2026-07-15T17:08:37+08:00",
       "n_submissions": 6,
-      "rank": 5,
+      "rank": 4,
       "token": "09722736922c"
+    },
+    {
+      "team": "aa5706b531e6",
+      "display": "xOTtow",
+      "variant": "Tron2ALegged",
+      "total": 89.0,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 100.0,
+        "base": 60.0,
+        "time_bonus": 20.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 5.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 4.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 2.0,
+        "finished": 1.0,
+        "elapsed_finish": 125.57999420166016,
+        "total": 89.0
+      },
+      "last_submit": "2026-07-16T22:23:52+08:00",
+      "best_submit": "2026-07-16T22:23:52+08:00",
+      "n_submissions": 6,
+      "token": "aa5706b531e6",
+      "rank": 5
     },
     {
       "team": "66fb8bcad323",
