@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-19T20:53:23+08:00",
+  "generated_at": "2026-07-19T20:59:13+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -303,6 +303,33 @@
       "token": "422b759f281a"
     },
     {
+      "team": "4aafd17846b7",
+      "display": "XdzLgg",
+      "variant": "Tron2ALegged",
+      "total": 39.0015,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 56.66911315917969,
+        "base": 34.00146484375,
+        "time_bonus": 0.0,
+        "no_fall_bonus": 5.0,
+        "recover_bonus": 0.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 0.0,
+        "finished": 0.0,
+        "elapsed_finish": 600.0,
+        "total": 39.00146484375
+      },
+      "last_submit": "2026-07-19T20:54:29+08:00",
+      "best_submit": "2026-07-19T20:54:29+08:00",
+      "n_submissions": 9,
+      "rank": 12,
+      "token": "4aafd17846b7"
+    },
+    {
       "team": "11a368adb8c2",
       "display": "SaKIYQ",
       "variant": "Tron2ALegged",
@@ -326,35 +353,8 @@
       "last_submit": "2026-07-19T20:45:44+08:00",
       "best_submit": "2026-07-19T15:13:40+08:00",
       "n_submissions": 8,
-      "rank": 12,
-      "token": "11a368adb8c2"
-    },
-    {
-      "team": "4aafd17846b7",
-      "display": "XdzLgg",
-      "variant": "Tron2ALegged",
-      "total": 34.3384,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 57.230712890625,
-        "base": 34.33842468261719,
-        "time_bonus": 0.0,
-        "no_fall_bonus": 0.0,
-        "recover_bonus": 0.0,
-        "boundary_penalty": -0.0,
-        "cross_platform_bonus": 0.0,
-        "platforms_assisted": 0.0,
-        "platforms_crossed": 0.0,
-        "finished": 0.0,
-        "elapsed_finish": 600.0,
-        "total": 34.33842468261719
-      },
-      "last_submit": "2026-07-19T20:13:03+08:00",
-      "best_submit": "2026-07-19T16:35:48+08:00",
-      "n_submissions": 8,
       "rank": 13,
-      "token": "4aafd17846b7"
+      "token": "11a368adb8c2"
     },
     {
       "team": "64c1e8416e8a",
