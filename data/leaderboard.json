@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-19T21:34:57+08:00",
+  "generated_at": "2026-07-20T00:02:04+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -782,6 +782,33 @@
       "token": "5ba92ff7fed1"
     },
     {
+      "team": "6dcbe890d5cd",
+      "display": "3g0mkw",
+      "variant": "Tron2ALegged",
+      "total": 4.1504,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 6.917301177978516,
+        "base": 4.150380611419678,
+        "time_bonus": 0.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 0.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 0.0,
+        "finished": 0.0,
+        "elapsed_finish": 600.0,
+        "total": 4.150380611419678
+      },
+      "last_submit": "2026-07-19T23:36:58+08:00",
+      "best_submit": "2026-07-19T23:36:58+08:00",
+      "n_submissions": 1,
+      "rank": 30,
+      "token": "6dcbe890d5cd"
+    },
+    {
       "team": "e1ba3abf080f",
       "display": "__oZOg",
       "variant": "Tron2ALegged",
@@ -803,7 +830,7 @@
       },
       "last_submit": "2026-07-07T15:09:35+08:00",
       "n_submissions": 2,
-      "rank": 30,
+      "rank": 31,
       "token": "e1ba3abf080f"
     },
     {
@@ -828,7 +855,7 @@
       },
       "last_submit": "2026-07-17T19:49:28+08:00",
       "n_submissions": 4,
-      "rank": 31,
+      "rank": 32,
       "token": "e6c9ead212c4"
     },
     {
@@ -855,7 +882,7 @@
       "last_submit": "2026-07-17T22:01:29+08:00",
       "best_submit": "2026-07-17T22:01:29+08:00",
       "n_submissions": 1,
-      "rank": 32,
+      "rank": 33,
       "token": "9aec72e4f4a8"
     },
     {
@@ -882,7 +909,7 @@
       "last_submit": "2026-07-17T12:04:09+08:00",
       "best_submit": "2026-07-17T12:04:09+08:00",
       "n_submissions": 1,
-      "rank": 33,
+      "rank": 34,
       "token": "37d3eed3e5f2"
     }
   ],
