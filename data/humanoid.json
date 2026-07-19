@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-19T09:23:27+08:00",
+  "generated_at": "2026-07-19T10:53:29+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -33,6 +33,33 @@
       "token": "172f72cebc47"
     },
     {
+      "team": "66fb8bcad323",
+      "display": "GVMD9Q",
+      "variant": "OliEdu",
+      "total": 14.7653,
+      "robot_type": "oli",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 14.434274673461914,
+        "base": 17.765260696411133,
+        "time_bonus": 0.0,
+        "boundary_penalty": -3.0,
+        "scuff_penalty": -0.0,
+        "fall_penalty": -0.0,
+        "boundary_crossings": 1.0,
+        "scuffs": 1.0,
+        "falls": 1.0,
+        "finished": 0.0,
+        "elapsed_finish": 720.0,
+        "total": 14.765260696411133
+      },
+      "last_submit": "2026-07-19T09:54:22+08:00",
+      "best_submit": "2026-07-19T09:54:22+08:00",
+      "n_submissions": 2,
+      "rank": 2,
+      "token": "66fb8bcad323"
+    },
+    {
       "team": "5ac24ef4cae6",
       "display": "UNDvDQ",
       "variant": "OliEdu",
@@ -55,7 +82,7 @@
       },
       "last_submit": "2026-07-12T11:59:26+08:00",
       "n_submissions": 7,
-      "rank": 2,
+      "rank": 3,
       "token": "5ac24ef4cae6"
     },
     {
@@ -81,7 +108,7 @@
       },
       "last_submit": "2026-07-09T12:21:33+08:00",
       "n_submissions": 3,
-      "rank": 3,
+      "rank": 4,
       "token": "00aa18c1f2c0"
     },
     {
@@ -107,7 +134,7 @@
       },
       "last_submit": "2026-07-10T01:38:47+08:00",
       "n_submissions": 2,
-      "rank": 4,
+      "rank": 5,
       "token": "e6c9ead212c4"
     },
     {
@@ -133,7 +160,7 @@
       },
       "last_submit": "2026-07-09T17:43:21+08:00",
       "n_submissions": 3,
-      "rank": 5,
+      "rank": 6,
       "token": "2059d9d972f2"
     },
     {
@@ -159,35 +186,8 @@
       },
       "last_submit": "2026-07-09T15:19:52+08:00",
       "n_submissions": 3,
-      "rank": 6,
-      "token": "e8a6438370c1"
-    },
-    {
-      "team": "66fb8bcad323",
-      "display": "GVMD9Q",
-      "variant": "OliEdu",
-      "total": 0.0,
-      "robot_type": "oli",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 0.016510009765625,
-        "base": 0.020320013165473938,
-        "time_bonus": 0.0,
-        "boundary_penalty": -3.0,
-        "scuff_penalty": -0.0,
-        "fall_penalty": -0.0,
-        "boundary_crossings": 1.0,
-        "scuffs": 0.0,
-        "falls": 1.0,
-        "finished": 0.0,
-        "elapsed_finish": 720.0,
-        "total": 0.0
-      },
-      "last_submit": "2026-07-19T08:58:27+08:00",
-      "best_submit": "2026-07-19T08:58:27+08:00",
-      "n_submissions": 1,
       "rank": 7,
-      "token": "66fb8bcad323"
+      "token": "e8a6438370c1"
     }
   ],
   "final": []
