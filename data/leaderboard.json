@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-20T00:02:04+08:00",
+  "generated_at": "2026-07-20T00:07:59+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -722,8 +722,8 @@
         "elapsed_finish": 600.0,
         "total": 12.230613708496094
       },
-      "last_submit": "2026-07-18T21:31:47+08:00",
-      "n_submissions": 7,
+      "last_submit": "2026-07-19T23:41:24+08:00",
+      "n_submissions": 8,
       "rank": 27,
       "token": "3216118fc550"
     },
