@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-19T00:23:22+08:00",
+  "generated_at": "2026-07-19T09:23:16+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -161,6 +161,33 @@
       "n_submissions": 3,
       "rank": 6,
       "token": "e8a6438370c1"
+    },
+    {
+      "team": "66fb8bcad323",
+      "display": "GVMD9Q",
+      "variant": "OliEdu",
+      "total": 0.0,
+      "robot_type": "oli",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 0.016510009765625,
+        "base": 0.020320013165473938,
+        "time_bonus": 0.0,
+        "boundary_penalty": -3.0,
+        "scuff_penalty": -0.0,
+        "fall_penalty": -0.0,
+        "boundary_crossings": 1.0,
+        "scuffs": 0.0,
+        "falls": 1.0,
+        "finished": 0.0,
+        "elapsed_finish": 720.0,
+        "total": 0.0
+      },
+      "last_submit": "2026-07-19T08:58:27+08:00",
+      "best_submit": "2026-07-19T08:58:27+08:00",
+      "n_submissions": 1,
+      "rank": 7,
+      "token": "66fb8bcad323"
     }
   ],
   "final": []
