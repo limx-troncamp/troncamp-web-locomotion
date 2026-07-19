@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-19T11:28:32+08:00",
+  "generated_at": "2026-07-19T14:26:27+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -53,9 +53,9 @@
         "elapsed_finish": 720.0,
         "total": 14.765260696411133
       },
-      "last_submit": "2026-07-19T09:54:22+08:00",
+      "last_submit": "2026-07-19T13:53:45+08:00",
       "best_submit": "2026-07-19T09:54:22+08:00",
-      "n_submissions": 2,
+      "n_submissions": 3,
       "rank": 2,
       "token": "66fb8bcad323"
     },
