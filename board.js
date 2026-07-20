@@ -123,7 +123,7 @@
       var ms = end - Date.now();
       if (ms <= 0) {
         el.textContent = Date.now() >= FREEZE_MS
-          ? '已截止 · 榜单已冻结为最终成绩'
+          ? '已截止 · FINAL 榜为最终成绩'
           : '已截止 · 评测结算中';
         el.classList.add('over');
         return;
