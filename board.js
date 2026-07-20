@@ -10,6 +10,8 @@
   var HUM_URL = cfg.HUMANOID_DATA_URL || './data/humanoid.json';
   var REFRESH = (cfg.REFRESH_SECONDS || 60) * 1000;
   var BOARD = 'dev';  // 实际值在 DOMContentLoaded 时从 <body data-board> 读取
+  // 终榜冻结时刻：此后 final 页固定展示 dev 榜数据（提交 24:00 截止，评测队列结算到 04:00）。
+  var FREEZE_MS = new Date(cfg.FINAL_FREEZE_AT || '2026-07-21T04:00:00+08:00').getTime();
 
   function esc(s) {
     var d = document.createElement('div');
@@ -98,12 +100,13 @@
   }
 
   // 按当前 BOARD(dev/final) 从一份数据里选行。
-  // dev: data.dev。final: 解锁且有终榜用 final；否则已截止用 dev；否则该源锁定(返回 null)。
-  function pickRows(data, over) {
+  // dev: data.dev。final: 解锁且有终榜用 final；冻结时刻后用 dev（冻结展示）；
+  // 否则该源锁定(返回 null)——含截止后至冻结前的评测结算窗口。
+  function pickRows(data, frozen) {
     if (!data) return [];
     if (BOARD === 'final') {
       if (data.final_unlocked && data.final && data.final.length) return data.final;
-      if (over) return data.dev || [];
+      if (frozen) return data.dev || [];
       return null;  // locked
     }
     return data.dev || [];
@@ -113,13 +116,15 @@
 
   function renderCountdown(deadline) {
     var el = document.getElementById('countdown');
-    if (!el) return false;
-    if (!deadline) { el.textContent = '—'; return false; }
+    if (!el) return;
+    if (!deadline) { el.textContent = '—'; return; }
     var end = new Date(deadline).getTime();
     function tick() {
       var ms = end - Date.now();
       if (ms <= 0) {
-        el.textContent = '已截止 · 榜单已冻结为最终成绩';
+        el.textContent = Date.now() >= FREEZE_MS
+          ? '已截止 · 榜单已冻结为最终成绩'
+          : '已截止 · 评测结算中';
         el.classList.add('over');
         return;
       }
@@ -132,7 +137,6 @@
     if (countdownTimer) clearInterval(countdownTimer);
     tick();
     countdownTimer = setInterval(tick, 1000);
-    return end - Date.now() <= 0;
   }
 
   function render(tronData, humData) {
@@ -144,16 +148,17 @@
 
     // 截止时间取任一源（两赛题截止一致）。
     var deadline = (humData && humData.deadline) || (tronData && tronData.deadline) || null;
-    var over = renderCountdown(deadline);
+    renderCountdown(deadline);
+    var frozen = Date.now() >= FREEZE_MS;
 
     var locked = document.getElementById('locked');
     var table = document.getElementById('board-table');
     var empty = document.getElementById('empty');
 
-    var tronRows = pickRows(tronData, over);
-    var humRows = pickRows(humData, over);
+    var tronRows = pickRows(tronData, frozen);
+    var humRows = pickRows(humData, frozen);
 
-    // final 板：两源都锁定 → 显示赛末公布。
+    // final 板：两源都锁定 → 显示赛末公布（含截止后至冻结前的结算窗口）。
     if (BOARD === 'final' && tronRows === null && humRows === null) {
       if (locked) locked.hidden = false;
       if (table) table.hidden = true;
