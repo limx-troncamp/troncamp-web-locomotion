@@ -1,7 +1,7 @@
 {
   "competition": "humanoid-locomotion",
   "task": "ATEC-TaskF",
-  "generated_at": "2026-07-20T13:57:08+08:00",
+  "generated_at": "2026-07-20T17:40:52+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -114,6 +114,33 @@
       "token": "e053bf790b9c"
     },
     {
+      "team": "fc28d3d0259f",
+      "display": "_mlUsQ",
+      "variant": "OliEdu",
+      "total": 1.4586,
+      "robot_type": "oli",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 1.1851444244384766,
+        "base": 1.45863938331604,
+        "time_bonus": 0.0,
+        "boundary_penalty": -0.0,
+        "scuff_penalty": -0.0,
+        "fall_penalty": -0.0,
+        "boundary_crossings": 0.0,
+        "scuffs": 0.0,
+        "falls": 2.0,
+        "finished": 0.0,
+        "elapsed_finish": 720.0,
+        "total": 1.45863938331604
+      },
+      "last_submit": "2026-07-20T16:29:27+08:00",
+      "best_submit": "2026-07-20T16:29:27+08:00",
+      "n_submissions": 1,
+      "rank": 5,
+      "token": "fc28d3d0259f"
+    },
+    {
       "team": "00aa18c1f2c0",
       "display": "ECw09A",
       "variant": "OliEdu",
@@ -136,7 +163,7 @@
       },
       "last_submit": "2026-07-09T12:21:33+08:00",
       "n_submissions": 3,
-      "rank": 5,
+      "rank": 6,
       "token": "00aa18c1f2c0"
     },
     {
@@ -162,7 +189,7 @@
       },
       "last_submit": "2026-07-10T01:38:47+08:00",
       "n_submissions": 2,
-      "rank": 6,
+      "rank": 7,
       "token": "e6c9ead212c4"
     },
     {
@@ -188,7 +215,7 @@
       },
       "last_submit": "2026-07-09T17:43:21+08:00",
       "n_submissions": 3,
-      "rank": 7,
+      "rank": 8,
       "token": "2059d9d972f2"
     },
     {
@@ -214,7 +241,7 @@
       },
       "last_submit": "2026-07-09T15:19:52+08:00",
       "n_submissions": 3,
-      "rank": 8,
+      "rank": 9,
       "token": "e8a6438370c1"
     },
     {
@@ -241,7 +268,7 @@
       "last_submit": "2026-07-20T13:36:35+08:00",
       "best_submit": "2026-07-20T13:36:35+08:00",
       "n_submissions": 1,
-      "rank": 9,
+      "rank": 10,
       "token": "9fb66cfe74b7"
     }
   ],
