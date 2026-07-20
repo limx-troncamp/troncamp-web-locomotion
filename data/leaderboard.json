@@ -1,7 +1,7 @@
 {
   "competition": "tron-locomotion",
   "task": "ATEC-TaskC",
-  "generated_at": "2026-07-20T23:36:39+08:00",
+  "generated_at": "2026-07-20T23:44:51+08:00",
   "deadline": "2026-07-20T16:00:00Z",
   "final_unlocked": false,
   "dev": [
@@ -168,6 +168,33 @@
       "token": "66fb8bcad323"
     },
     {
+      "team": "422b759f281a",
+      "display": "90hOtg",
+      "variant": "Tron2ALegged",
+      "total": 85.0,
+      "robot_type": "sfyg_tron2a",
+      "weight": 1.0,
+      "breakdown": {
+        "d_eff": 100.0,
+        "base": 60.0,
+        "time_bonus": 20.0,
+        "no_fall_bonus": 0.0,
+        "recover_bonus": 5.0,
+        "boundary_penalty": -0.0,
+        "cross_platform_bonus": 0.0,
+        "platforms_assisted": 0.0,
+        "platforms_crossed": 0.0,
+        "finished": 1.0,
+        "elapsed_finish": 153.44000244140625,
+        "total": 85.0
+      },
+      "last_submit": "2026-07-20T22:31:20+08:00",
+      "best_submit": "2026-07-20T22:31:20+08:00",
+      "n_submissions": 8,
+      "rank": 7,
+      "token": "422b759f281a"
+    },
+    {
       "team": "171018fff874",
       "display": "JFiljg",
       "variant": "Tron2ALegged",
@@ -191,7 +218,7 @@
       "last_submit": "2026-07-20T19:36:39+08:00",
       "best_submit": "2026-07-20T19:36:39+08:00",
       "n_submissions": 12,
-      "rank": 7,
+      "rank": 8,
       "token": "171018fff874"
     },
     {
@@ -218,7 +245,7 @@
       "last_submit": "2026-07-20T22:21:06+08:00",
       "best_submit": "2026-07-20T22:19:51+08:00",
       "n_submissions": 14,
-      "rank": 8,
+      "rank": 9,
       "token": "5ac24ef4cae6"
     },
     {
@@ -245,7 +272,7 @@
       "last_submit": "2026-07-19T10:34:35+08:00",
       "best_submit": "2026-07-16T13:18:43+08:00",
       "n_submissions": 12,
-      "rank": 9,
+      "rank": 10,
       "token": "c94272c23a1e"
     },
     {
@@ -272,35 +299,8 @@
       "last_submit": "2026-07-20T15:53:48+08:00",
       "best_submit": "2026-07-18T00:03:50+08:00",
       "n_submissions": 14,
-      "rank": 10,
-      "token": "d51b1a56aedc"
-    },
-    {
-      "team": "422b759f281a",
-      "display": "90hOtg",
-      "variant": "Tron2ALegged",
-      "total": 51.0467,
-      "robot_type": "sfyg_tron2a",
-      "weight": 1.0,
-      "breakdown": {
-        "d_eff": 76.74444580078125,
-        "base": 46.04666519165039,
-        "time_bonus": 0.0,
-        "no_fall_bonus": 0.0,
-        "recover_bonus": 5.0,
-        "boundary_penalty": -0.0,
-        "cross_platform_bonus": 0.0,
-        "platforms_assisted": 0.0,
-        "platforms_crossed": 0.0,
-        "finished": 0.0,
-        "elapsed_finish": 600.0,
-        "total": 51.04666519165039
-      },
-      "last_submit": "2026-07-20T16:17:08+08:00",
-      "best_submit": "2026-07-19T14:38:30+08:00",
-      "n_submissions": 7,
       "rank": 11,
-      "token": "422b759f281a"
+      "token": "d51b1a56aedc"
     },
     {
       "team": "efa041654757",
